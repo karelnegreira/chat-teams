@@ -1,3 +1,7 @@
+
+import { FcGoogle }  from 'react-icons/fc';
+import { FaGithub } from 'react-icons/fa';
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -33,14 +37,32 @@ export const SignInCard = () => {
             type="password"
             required
           />
-          <Button variant="ghost" type="submit" className="w-full" size="lg" disabled={false}>
+          <Button type="submit" className=" bg-black w-full text-cyan-50" size="lg" disabled={false}>
             Continue
           </Button>
         </form>
         <Separator/>
           <div className="flex flex-col gap-y-2.5">
-            <Button>
+            <Button
+              disabled={false}
+              onClick={() => {}}
+              variant="outline"
+              size="lg"
+              className="w-full relative bg-white text-black"
+            >
+              <FcGoogle  className="size-5 absolute top-2.5 left-2.5"/>
               Continue with Google
+            </Button>
+
+            <Button
+              disabled={false}
+              onClick={() => {}}
+              variant="outline"
+              size="lg"
+              className="w-full relative bg-white text-black"
+            >
+              <FaGithub  className="size-5 absolute top-2.5 left-2.5"/>
+              Continue with Github
             </Button>
           </div>
       </CardContent>
