@@ -18,7 +18,7 @@ export const SignUpCard = ({ setState }: SignUpCardProps) => {
     <Card className="w-full h-full p-8">
       <CardHeader className="px-0 pt-0">
         <CardTitle>
-          Log in to continue
+          Sign up to continue
         </CardTitle>
         <CardDescription>
           Use your email or another service to continue
@@ -39,6 +39,14 @@ export const SignUpCard = ({ setState }: SignUpCardProps) => {
             value=""
             onChange={() => {}}
             placeholder="Password"
+            type="password"
+            required
+          />
+          <Input
+            disabled={false}
+            value=""
+            onChange={() => {}}
+            placeholder="Confirm password"
             type="password"
             required
           />
@@ -71,7 +79,7 @@ export const SignUpCard = ({ setState }: SignUpCardProps) => {
             </Button>
           </div>
           <p className='text-xs text-muted-foreground justify-center'>
-            Don't have an account?<span onClick={() => setState("signUp")} className='text-sky-700 hover:underline cursor-pointer'>Sign up</span>
+            Already have an account?<span onClick={() => setState("signIn")} className='text-sky-700 hover:underline cursor-pointer'>Sign in</span>
           </p>
       </CardContent>
     </Card>
