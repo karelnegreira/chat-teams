@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import { Separator } from "@/components/ui/separator"
 
 
 export const SignInCard = () => {
@@ -32,12 +33,17 @@ export const SignInCard = () => {
             type="password"
             required
           />
-          <Button type="submit" className="w-full" size="lg" disabled={false}>
+          <Button variant="ghost" type="submit" className="w-full" size="lg" disabled={false}>
             Continue
           </Button>
         </form>
+        <Separator/>
+          <div className="flex flex-col gap-y-2.5">
+            <Button>
+              Continue with Google
+            </Button>
+          </div>
       </CardContent>
-      Sign in
     </Card>
   )
 }
