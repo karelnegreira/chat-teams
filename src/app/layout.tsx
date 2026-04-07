@@ -1,3 +1,5 @@
+import { ConvexAuthNextjsServerProvider } from "@convex-dev/auth/nextjs/server";
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
@@ -19,6 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
+    <ConvexAuthNextjsServerProvider>
     <html lang="en" className={cn("h-full font-sans", GeistSans.variable)}>
         <body className={cn("min-h-screen", inter.className)}>
           <ConvexClientProvider>
@@ -26,5 +29,6 @@ export default function RootLayout({
           </ConvexClientProvider>
         </body>
     </html>
+    </ConvexAuthNextjsServerProvider>
   );
 }
