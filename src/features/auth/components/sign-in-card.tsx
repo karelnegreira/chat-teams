@@ -8,6 +8,8 @@ import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 import { SignInFlow } from '../types';
 import { useState } from 'react';
+import { signIn } from '../../../../convex/auth';
+import { useAuthActions } from '@convex-dev/auth/react';
 
 interface SignInCardProps {
   setState: (state: SignInFlow) => void, 
@@ -16,8 +18,14 @@ interface SignInCardProps {
 
 export const SignInCard = ({ setState }: SignInCardProps) => {
 
+  const { signIn } = useAuthActions();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const handleProviderSignIn = (value: "github" | "google") => {
+    signIn(value)
+  }
 
   return (
     <Card className="w-full h-full p-8">
@@ -66,7 +74,7 @@ export const SignInCard = ({ setState }: SignInCardProps) => {
 
             <Button
               disabled={false}
-              onClick={() => {}}
+              onClick={() => handleProviderSignIn("github")}
               variant="outline"
               size="lg"
               className="w-full relative bg-white text-black"
