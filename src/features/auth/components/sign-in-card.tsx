@@ -8,7 +8,6 @@ import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 import { SignInFlow } from '../types';
 import { useState } from 'react';
-import { signIn } from '../../../../convex/auth';
 import { useAuthActions } from '@convex-dev/auth/react';
 
 interface SignInCardProps {

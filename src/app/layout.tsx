@@ -22,13 +22,13 @@ export default function RootLayout({
 }) {
   return (
     <ConvexAuthNextjsServerProvider>
-    <html lang="en" className={cn("h-full font-sans", GeistSans.variable)}>
-        <body className={cn("min-h-screen", inter.className)}>
-          <ConvexClientProvider>
-            {children}
-          </ConvexClientProvider>
-        </body>
-    </html>
+      <html lang="en" className={cn("h-full font-sans", GeistSans.variable)}>
+          <body className={cn("min-h-screen", inter.className)}>
+            <ConvexClientProvider>
+              {children}
+            </ConvexClientProvider>
+          </body>
+      </html>
     </ConvexAuthNextjsServerProvider>
   );
 }
