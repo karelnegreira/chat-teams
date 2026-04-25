@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 import { SignInFlow } from '../types';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useAuthActions } from '@convex-dev/auth/react';
 
 interface SignInCardProps {
@@ -21,7 +21,20 @@ export const SignInCard = ({ setState }: SignInCardProps) => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const [pending, setPending] = useState(false);
+
+  const onPasswordSignIn = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setPending(true);
+    signIn("password", {email, password, flow: "signIn" }) 
+      .catch(() => {
+
+      })
+      .finally(() => {
+        setPending(false);
+      })
+  }
 
   const handleProviderSignIn = (value: "github" | "google") => {
     setPending(true);
