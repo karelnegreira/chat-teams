@@ -1,6 +1,6 @@
 "use client";
 
-import { Loader } from 'lucide-react';
+import { Loader, LogOut } from 'lucide-react';
 
 import {
     Avatar, 
@@ -28,7 +28,7 @@ export const UserButton = () => {
         return null;
     }
 
-    const { image, name, email } = data;
+    const { image, name } = data;
 
     const avatarFallback = name!.charAt(0).toUpperCase()
 
@@ -44,7 +44,7 @@ export const UserButton = () => {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="center" side="right" className="w-60">
                 <DropdownMenuItem>
-                    
+                    <LogOut />
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
