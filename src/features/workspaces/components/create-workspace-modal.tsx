@@ -12,12 +12,23 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
 import { useCreateWorkspaceModal } from '../store/use-create-workspace-modal';
+import { useCreateWorkspace } from '../api/use-create-workspace';
 
 export const CreateWorksSpaceModal = () => {
+
     const [open, setOpen] = useCreateWorkspaceModal();
+
+    const { mutate } = useCreateWorkspace();
+
     const handleClose = () => {
         setOpen(false);
         //TODO: clear form 
+    };
+
+    const handleSubmit = () => {
+        mutate({
+            name: "Workspace 1", 
+        })
     }
 
     return (
