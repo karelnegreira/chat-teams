@@ -22,7 +22,7 @@ export const CreateWorksSpaceModal = () => {
 
     return (
         <Dialog open={open} onOpenChange={handleClose}>
-            <DialogContent>
+            <DialogContent className="bg-slate-50">
                 <DialogHeader>
                     <DialogTitle>Add a workspace</DialogTitle>
                 </DialogHeader>
@@ -33,8 +33,13 @@ export const CreateWorksSpaceModal = () => {
                         required
                         autoFocus
                         minLength={3}
-                        placeholder="Workspace"
+                        placeholder="Workspace name e.g 'Work', 'Personal', 'Home'"
                     />
+                    <div className="flex justify-end">
+                        <Button disabled={false} className="bg-black text-white text-wrap">
+                            Create
+                        </Button>
+                    </div>
                 </form>
             </DialogContent>
         </Dialog>
