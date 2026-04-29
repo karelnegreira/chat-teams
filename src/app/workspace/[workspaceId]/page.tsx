@@ -1,12 +1,14 @@
 "use client";
 
+import { useWorkspaceId } from '@/hooks/use-workspace-id';
 import {useParams} from 'next/navigation';
 
 const WorkspaceIdPage = () => {
-    const params = useParams()
+    const workspaceId = useWorkspaceId();
+
     return (
         <div>
-            ID: {params.workspaceId}
+            ID: {workspaceId}
         </div>
     );
 }
