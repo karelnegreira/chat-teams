@@ -1,5 +1,7 @@
 "use client";
 
+import { useRouter } from 'next/navigation';
+
 import {
     Dialog, 
     DialogContent, 
@@ -18,17 +20,31 @@ export const CreateWorksSpaceModal = () => {
 
     const [open, setOpen] = useCreateWorkspaceModal();
 
-    const { mutate } = useCreateWorkspace();
+    const { mutate} = useCreateWorkspace();
+
+    const { router } = useRouter();
 
     const handleClose = () => {
         setOpen(false);
         //TODO: clear form 
     };
 
-    const handleSubmit = () => {
-        mutate({
-            name: "Workspace 1", 
-        })
+    const handleSubmit = async () => {
+        try {
+            const data = await mutate({
+                name: "Workspace 1", 
+            }, {
+                onSuccess(data) {
+                
+                },
+                onError(error) {
+
+                }, 
+                })
+            } catch(error) {
+
+            }
+        
     }
 
     return (
