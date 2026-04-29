@@ -1,11 +1,15 @@
 "use client";
 
+import {router} from 'next/navigation';
 import { UserButton } from '@/features/auth/components/user-button';
 import { useCreateWorkspaceModal } from '@/features/workspaces/store/use-create-workspace-modal';
 import { useGetWorkspaces } from '@/features/workspaces/api/user-get-workspace';
 import { useEffect, useMemo } from 'react';
+import { useRouter } from '../../node_modules/next/navigation';
 
 export default function Home() {
+
+  const router = useRouter();
 
   const [open, setOpen] = useCreateWorkspaceModal();
 
@@ -16,11 +20,11 @@ export default function Home() {
   useEffect(() => {
     if (isLoading) return;
     if (workspaceId) {
-      console.log("Redirect to workspace")
+      router.replace(`/workspace/${workspaceId}`)
     } else if (!open) {
       setOpen(true);
     }
-  }, [workspaceId, isLoading, open, setOpen])
+  }, [workspaceId, isLoading, open, setOpen, router])
   
   return (
     <div>
