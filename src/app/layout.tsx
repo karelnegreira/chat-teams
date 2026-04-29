@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { Toaster } from '@/components/ui/sonner';
 
 import { ConvexClientProvider } from "@/components/convex-client-provider";
 import { CreateWorksSpaceModal } from "@/features/workspaces/components/create-workspace-modal";
@@ -27,6 +28,7 @@ export default function RootLayout({
       <html lang="en" className={cn("h-full font-sans", GeistSans.variable)}>
           <body className={cn("min-h-screen", inter.className)}>
             <ConvexClientProvider>
+              <Toaster />
               <Modals />
               {children}
             </ConvexClientProvider>

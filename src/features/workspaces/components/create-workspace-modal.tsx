@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 import {
     Dialog, 
@@ -12,6 +13,7 @@ import {
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+
 
 import { useCreateWorkspaceModal } from '../store/use-create-workspace-modal';
 import { useCreateWorkspace } from '../api/use-create-workspace';
@@ -35,6 +37,7 @@ export const CreateWorksSpaceModal = () => {
         e.preventDefault();
         mutate({name}, {
             onSuccess(data) {
+                toast.success("Workspace created");
                 router.push(`/workspace/${data}`)
                 handleClose();
             }
