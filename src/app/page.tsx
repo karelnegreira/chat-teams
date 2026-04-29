@@ -1,11 +1,11 @@
 "use client";
 
-import {router} from 'next/navigation';
+
 import { UserButton } from '@/features/auth/components/user-button';
 import { useCreateWorkspaceModal } from '@/features/workspaces/store/use-create-workspace-modal';
 import { useGetWorkspaces } from '@/features/workspaces/api/user-get-workspace';
 import { useEffect, useMemo } from 'react';
-import { useRouter } from '../../node_modules/next/navigation';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
 

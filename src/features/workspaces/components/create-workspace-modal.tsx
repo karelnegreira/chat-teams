@@ -18,24 +18,25 @@ import { useCreateWorkspace } from '../api/use-create-workspace';
 import React, { useState } from 'react';
 
 export const CreateWorksSpaceModal = () => {
+    const router = useRouter();
 
     const [open, setOpen] = useCreateWorkspaceModal();
     const [name, setName] = useState("");
-
     const { mutate, isPending, isError, isSuccess, data, error } = useCreateWorkspace();
 
-    const { router } = useRouter();
+    
 
     const handleClose = () => {
         setOpen(false);
-        //TODO: clear form 
+        setName("");
     };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         mutate({name}, {
             onSuccess(data) {
-                console.log(data);
+                router.push(`/workspace/${data}`)
+                handleClose();
             }
         })
     }
