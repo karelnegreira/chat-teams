@@ -15,7 +15,7 @@ import {
     DropdownMenuItem, 
     DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
-import { useCurrentUser } from '../hooks/use-current-user';
+import { useCurrentUser } from '../api/use-current-user';
 
 export const UserButton = () => {
     const {signOut} = useAuthActions();
@@ -38,12 +38,12 @@ export const UserButton = () => {
             <DropdownMenuTrigger className="outline-none relative">
                 <Avatar className="size-10 hover:opacity-75 transition">
                     <AvatarImage alt={name} src={image}/>
-                    <AvatarFallback className="bg-pink-700">
+                    <AvatarFallback className="bg-violet-600 text-white">
                         {avatarFallback}
                     </AvatarFallback>
                 </Avatar>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="center" side="right" className="w-60">
+            <DropdownMenuContent align="center" side="right" className="w-60 text-border bg-slate-100">
                 <DropdownMenuItem onClick={() => signOut()} className="h-10">
                     <LogOut className="size-4 mr-2" />
                         Logout
