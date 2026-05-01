@@ -2,6 +2,15 @@ import { auth } from './auth';
 import { mutation, query } from './_generated/server';
 import {v} from 'convex/values';
 
+const generateCode = () => {
+    const code = Array.from(
+        {length: 6}, 
+        () => "0123456789abcdefghijklmnopqrstuvwxyz"[Math.floor(Math.random() * 36 )]
+    ).join("");
+
+    return code;
+}
+
 export const create = mutation({
     args: {
         name: v.string(), 
@@ -76,7 +85,7 @@ export const getById = query({
                     q.eq("workspaceId", args.id).eq("userId", userId),
                 )
                 .unique();
-                
+
         if (!member) {
             return null;
         }
