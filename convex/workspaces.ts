@@ -22,7 +22,7 @@ export const create = mutation({
             throw new Error("Unauthorized")
         }
         //TODO: Create a proper method
-        const joinCode = "12345";
+        const joinCode = generateCode();
 
         const workspaceId = await ctx.db.insert("workspaces", {
             name: args.name, 
