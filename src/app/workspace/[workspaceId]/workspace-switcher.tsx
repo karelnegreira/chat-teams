@@ -54,7 +54,7 @@ export const WorkspaceSwitcher = () => {
                         <div className="size-9 relative overflow-hidden bg-[#a36ab9] text-slate-800 font-semibold text-lg rounded-md flex items-center justify-center mr-2">
                             {workspace.name.charAt(0).toUpperCase()}
                         </div>
-                        {workspace.name}
+                        <p className="truncate">{workspace.name}</p>
                     </DropdownMenuItem>
                 ))}
                 <DropdownMenuItem className="cursor-pointer" onClick={() => setOpen(true)}>
