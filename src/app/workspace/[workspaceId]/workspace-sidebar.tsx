@@ -1,4 +1,4 @@
-import {Loader} from 'lucide-react';
+import {Loader, AlertTriangle} from 'lucide-react';
 
 import { useCurrentMember } from "@/features/members/api/use-current-member";
 import { useGetWorkspace } from "@/features/workspaces/api/user-get-workspace";
@@ -14,12 +14,26 @@ export const WorkspaceSidebar = () => {
     if (workspaceLoading || memberLoading) {
         return (
             <div className="flex flex-col bg-[#5E2C5F] h-full items-center justify-center">
-                <Loader className="size-5 animate-spin text-white"/>
+                <Loader className="size-5 text-white"/>
+                <p className="text-white text-sm">
+                    Workspace not found
+                </p>
             </div>
         )
     }
+
+    if (!workspace || !member) {
+        return (
+            <div className="flex flex-col gap-y-2 bg-[#5E2C5F] h-full items-center justify-center">
+                <AlertTriangle className="size-5 animate-spin text-white"/>
+            </div>
+        )
+    }
+
   return (
-    <div>workspace-sidebar</div>
+    <div className="flex flex-col bg-[#5E2C5F] h-full">
+        workspace-sidebar
+    </div>
   )
 }
 
