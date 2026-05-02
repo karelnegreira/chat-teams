@@ -19,7 +19,7 @@ const ResizablePanelGroup = ({
 )
 
 const ResizablePanel = ResizablePrimitive.Panel
-
+console.log(ResizablePrimitive)
 const ResizableHandle = ({
   withHandle,
   className,
