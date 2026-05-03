@@ -34,7 +34,7 @@ export const WorkspaceHeader = ({workspace}: WorkspaceHeaderProps) => {
                 <DropdownMenuContent
                     side="bottom"
                     align="start"
-                    className="w-64 bg-gray-800 text-white border border-gray-700 shadow-md rounded-md"
+                    className="w-64 bg-gray-400 text-black border border-gray-700 shadow-md rounded-md"
                 >
                     <DropdownMenuItem
                         className="cursor-pointer capitalize"
