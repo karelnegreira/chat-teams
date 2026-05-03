@@ -13,11 +13,12 @@ import {
 import { Doc } from '../../../../convex/_generated/dataModel'
 
 interface WorkspaceHeaderProps {
-    workspace: Doc<"workspaces">, 
+    workspace: Doc<"workspaces">;
+    isAdmin: boolean;
 }
 
 
-export const WorkspaceHeader = ({workspace}: WorkspaceHeaderProps) => {
+export const WorkspaceHeader = ({workspace, isAdmin}: WorkspaceHeaderProps) => {
     return (
         <div className="flex items-center justify-between px-4 h-[49px] gap-0.5">
             <DropdownMenu>
