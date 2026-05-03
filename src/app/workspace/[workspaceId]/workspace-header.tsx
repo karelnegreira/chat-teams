@@ -47,6 +47,20 @@ export const WorkspaceHeader = ({workspace}: WorkspaceHeaderProps) => {
                             <p className="text-xs text-muted-foreground">Active workspace</p>
                         </div>
                     </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem
+                        className="cursor-pointer"
+                        onClick={() => {}}
+                    >
+                        Invite people to {workspace.name}
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem
+                        className="cursor-pointer"
+                        onClick={() => {}}
+                    >
+                        Preferences
+                    </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
         </div>
