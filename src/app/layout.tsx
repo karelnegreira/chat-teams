@@ -10,6 +10,7 @@ import { Toaster } from '@/components/ui/sonner';
 import { ConvexClientProvider } from "@/components/convex-client-provider";
 import { CreateWorksSpaceModal } from "@/features/workspaces/components/create-workspace-modal";
 import { Modals } from "@/components/modals";
+import { JotaiProvider } from "@/components/jotai-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,9 +29,11 @@ export default function RootLayout({
       <html lang="en" className={cn("h-full font-sans", GeistSans.variable)}>
           <body className={cn("min-h-screen", inter.className)}>
             <ConvexClientProvider>
-              <Toaster />
-              <Modals />
-              {children}
+              <JotaiProvider>
+                <Toaster />
+                <Modals />
+                {children}
+              </JotaiProvider>
             </ConvexClientProvider>
           </body>
       </html>
