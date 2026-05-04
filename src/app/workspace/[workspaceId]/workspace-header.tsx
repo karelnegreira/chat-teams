@@ -1,6 +1,6 @@
 
 import {ChevronDown, SquarePen, ListFilter} from 'lucide-react';
-
+import { Hint } from '@/components/hint';
 import { Button } from '@/components/ui/button'
 
 import {
@@ -73,9 +73,11 @@ export const WorkspaceHeader = ({workspace, isAdmin}: WorkspaceHeaderProps) => {
                 <Button variant="transparent" size="iconSm">
                         <ListFilter className="size-4 bg-gray-500" />
                 </Button>
-                <Button variant="transparent" size="iconSm">
-                        <SquarePen className="size-4 bg-gray-500" />
-                </Button>
+                <Hint label="New message" side="bottom">
+                    <Button variant="transparent" size="iconSm">
+                            <SquarePen className="size-4 bg-gray-500" />
+                    </Button>
+                </Hint>
             </div>
         </div>
     )
