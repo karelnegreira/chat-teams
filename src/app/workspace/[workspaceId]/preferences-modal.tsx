@@ -53,7 +53,7 @@ export const PreferencesModal = ({open, setOpen, initialValue}: PreferencesModal
                     className="flex items-center justify-start gap-x-2 px-5 py-4 bg-white rounded-lg  border cursor-pointer hover:bg-gray-50 text-rose-600"
                 >
                     <TrashIcon className="size-4"/>
-                    <p className="text-sm font-semibold">Delete this workspace</p>
+                    <p className="text-sm font-extrabold">Delete this workspace</p>
                 </Button>
             </DialogContent>
         </Dialog>
