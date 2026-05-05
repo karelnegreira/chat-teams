@@ -14,6 +14,7 @@ import {
     DialogDescription,
   } from '@/components/ui/dialog'; 
 import { Button } from '@/components/ui/button';
+import { useUpdateWorkspace } from '@/features/workspaces/api/use-update-workspace ';
 
   interface PreferencesModalProps {
     open:  boolean;
@@ -24,6 +25,9 @@ import { Button } from '@/components/ui/button';
 
 export const PreferencesModal = ({open, setOpen, initialValue}: PreferencesModalProps) => {
     const [value, setValue] = useState(initialValue)
+
+    const {mutate: updateWorkspace, isPending: isUpdatingWorkspace} = useUpdateWorkspace();
+
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogContent className="p-0 bg-gray-50 overflow-hidden">
