@@ -11,9 +11,9 @@ import {
     DialogTitle,
     DialogDescription,
   } from '@/components/ui/dialog';
-import { useState } from 'react';
+import { JSXElementConstructor, useState } from 'react';
 
-  export const useConfirm = (title: string, message: string): [any, any] => {
+  export const useConfirm = (title: string, message: string): [JSX.Element, Promise<unknown>] => {
     const [promise, setPromise] = useState<{resolve: (value: boolean) => void} | null>(null)
 
     const confirm = () => new Promise((resolve, reject) => {
