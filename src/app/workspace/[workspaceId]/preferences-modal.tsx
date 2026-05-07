@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {TrashIcon} from 'lucide-react';
 import {toast} from 'sonner';
+import { useRouter } from 'next/navigation';
 
 import {
     Dialog,
@@ -19,7 +20,6 @@ import { useUpdateWorkspace } from '@/features/workspaces/api/use-update-workspa
 import { useRemoveWorkspace } from '@/features/workspaces/api/use-remove-workspace';
 import { Input } from '@/components/ui/input';
 import { useWorkspaceId } from '@/hooks/use-workspace-id';
-import { Toaster } from '@/components/ui/sonner';
 
   interface PreferencesModalProps {
     open:  boolean;
@@ -30,11 +30,27 @@ import { Toaster } from '@/components/ui/sonner';
 
 export const PreferencesModal = ({open, setOpen, initialValue}: PreferencesModalProps) => {
     const workspaceId = useWorkspaceId();
+    const router = useRouter()
     const [value, setValue] = useState(initialValue);
     const [editOpen, setEditOpen] = useState(false);
 
     const {mutate: updateWorkspace, isPending: isUpdatingWorkspace} = useUpdateWorkspace();
     const {mutate: removeWorkspace, isPending: isRemovingWorkspace} = useRemoveWorkspace();
+
+    const handleRemove = () => {
+        removeWorkspace({
+            id: workspaceId
+        
+        }, {
+            onSuccess: () => {
+                toast.success("Workspace removed");
+                router.replace("/");
+            }, 
+            onError: () => {
+                toast.error("Failed to remove workspace");
+            }
+        })
+    }
 
     const handleEdit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -106,8 +122,8 @@ export const PreferencesModal = ({open, setOpen, initialValue}: PreferencesModal
                     </Dialog>
                 
                 <button
-                    disabled={false}
-                    onClick={() => {}}
+                    disabled={isRemovingWorkspace}
+                    onClick={handleRemove} 
                     className="flex items-center justify-start gap-x-2 px-5 py-4 bg-white rounded-lg  border cursor-pointer hover:bg-gray-50 text-rose-600"
                 >
                     <TrashIcon className="size-4"/>

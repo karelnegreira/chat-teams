@@ -129,7 +129,7 @@ export const update = mutation({
 export const remove = mutation({
     args: {
         id: v.id("workspaces"),
-        name: v.string(),
+    
     },
     handler: async (ctx, args) => {
         const userId = await auth.getUserId(ctx);
