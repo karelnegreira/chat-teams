@@ -80,12 +80,12 @@ export const WorkspaceHeader = ({workspace, isAdmin}: WorkspaceHeaderProps) => {
                 <div className="flex items-center gap-0.5">
                 <Hint label='Search' side='bottom'>
                     <Button variant="transparent" size="iconSm">
-                            <ListFilter className="size-4 bg-gray-500" />
+                            <ListFilter className="size-4 bg-white" />
                     </Button>
                 </Hint>
                     <Hint label="New message" side="bottom">
                         <Button variant="transparent" size="iconSm">
-                                <SquarePen className="size-4 bg-gray-500" />
+                                <SquarePen className="size-4 bg-white" />
                         </Button>
                     </Hint>
                 </div>
