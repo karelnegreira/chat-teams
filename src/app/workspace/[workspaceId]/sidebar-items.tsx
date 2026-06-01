@@ -8,16 +8,22 @@ import { useWorkspaceId } from '@/hooks/use-workspace-id';
 import { cn } from '@/lib/utils';
 
 const sidebarItemVariants = cva(
-    "flex items-center gap-1.5 justify-center font-normal h-7 px-[18px] text-sm overflow-hidden", 
+    "flex items-center gap-1.5 justify-center font-bold h-7 px-[18px] text-sm overflow-hidden w-full",
     {
-        variants: {
-            variant: {
-                default: "text-[#f9edffcc]", 
-                active: "text-[#481349] bg-white/90 hover:bg-white/90"
-            }, 
-        }, 
-    }, 
-);
+      variants: {
+        variant: {
+          default:
+            "text-[#f9edffcc] hover:bg-white/10 hover:text-white",
+  
+          active:
+            "bg-white/90 text-[#481349] hover:bg-white/90",
+        },
+      },
+      defaultVariants: {
+        variant: "default",
+      },
+    }
+  )
 
 interface SidebarItemsProps {
     label: string; 
@@ -32,13 +38,13 @@ export const SidebarItems = ({label, id, icon: Icon, variant}: SidebarItemsProps
     const workspaceId = useWorkspaceId();
     return (
         <Button
-            variant="transparent"
+            variant="ghost"
             size="lg"
             className={cn(sidebarItemVariants({variant: variant }))}
             asChild
         >
             <Link href={`/workspace/${workspaceId}/channel/${id}`}>
-                <Icon />
+                <Icon className="size-4"/>
                 <span>{label}</span>
             </Link>
         </Button>
