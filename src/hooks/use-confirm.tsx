@@ -13,7 +13,10 @@ import {
   } from '@/components/ui/dialog';
 import { JSXElementConstructor, useState } from 'react';
 
-  export const useConfirm = (title: string, message: string): [JSX.Element, Promise<unknown>] => {
+  export const useConfirm = (
+        title: string, 
+        message: string, ): [() => JSX.Element, () => Promise<unknown>] => {
+    
     const [promise, setPromise] = useState<{resolve: (value: boolean) => void} | null>(null)
 
     const confirm = () => new Promise((resolve, reject) => {
@@ -35,34 +38,37 @@ import { JSXElementConstructor, useState } from 'react';
     }
 
     const ConfirmDialog = () => {
-        <Dialog open={promise !== null}>
-            <DialogContent>
-                <DialogHeader>
-                    <DialogTitle>
-                        {title}
-                    </DialogTitle>
-                    <DialogDescription>
-                        {message}
-                    </DialogDescription>
-                </DialogHeader>
-                <DialogFooter className='pt-2'>
-                    <Button
-                        onClick={handleCancel}
-                        variant="outline"
-                    >
-                        Cancel
+        return (
+            <Dialog open={promise !== null}>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>
+                            {title}
+                        </DialogTitle>
+                        <DialogDescription>
+                            {message}
+                        </DialogDescription>
+                    </DialogHeader>
+                    <DialogFooter className='pt-2'>
+                        <Button
+                            onClick={handleCancel}
+                            variant="outline"
+                        >
+                            Cancel
 
-                    </Button>
-                    <Button
-                        onClick={handleCancel}
-                    >
-                        Confirm
+                        </Button>
+                        <Button
+                            onClick={handleCancel}
+                        >
+                            Confirm
 
-                    </Button>
-                </DialogFooter>
-            </DialogContent>
-        </Dialog>
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
+        )
     }
+    
     
     return [ConfirmDialog, confirm]
   }
