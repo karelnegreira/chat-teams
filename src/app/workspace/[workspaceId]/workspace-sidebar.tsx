@@ -38,8 +38,8 @@ export const WorkspaceSidebar = () => {
         <div className="flex flex-col px-2 mt-3">
             <SidebarItems 
                 label="Threads"
-                icon={MessageSquareText}
                 id="threads"
+                icon={MessageSquareText}
             />
         </div>
     </div>
