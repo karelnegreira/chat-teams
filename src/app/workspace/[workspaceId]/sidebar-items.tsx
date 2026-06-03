@@ -8,7 +8,7 @@ import { useWorkspaceId } from '@/hooks/use-workspace-id';
 import { cn } from '@/lib/utils';
 
 const sidebarItemVariants = cva(
-    "flex items-center gap-1.5 justify-center font-bold h-7 px-[18px] text-sm overflow-hidden w-full",
+    "flex items-center gap-1.5 justify-start font-bold h-7 px-[18px] text-sm overflow-hidden w-full",
     {
       variants: {
         variant: {
@@ -45,7 +45,7 @@ export const SidebarItems = ({label, id, icon: Icon, variant}: SidebarItemsProps
         >
             <Link href={`/workspace/${workspaceId}/channel/${id}`}>
                 <Icon className="size-4"/>
-                <span>{label}</span>
+                <span className="text-sm truncate">{label}</span>
             </Link>
         </Button>
     )
