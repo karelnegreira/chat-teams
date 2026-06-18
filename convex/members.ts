@@ -35,7 +35,18 @@ export const get = query({
 
         const members = []
 
+        for (const member of data ) {
+            const user = await populateUser(ctx, member.userId)
 
+            if (user) {
+                members.push({
+                    ...member, 
+                    user, 
+                });
+            }
+        }
+        
+        return members;
     },
 });
 
@@ -54,6 +65,7 @@ export const current = query({
                     .eq("userId", userId)
                     )
                     .unique();
+
         if (!member) {
             return null;
         }
