@@ -43,7 +43,7 @@ export const SidebarItems = ({label, id, icon: Icon, variant}: SidebarItemsProps
             className={cn(sidebarItemVariants({variant: variant }))}
             asChild
         >
-            <Link href={`/workspace/${workspaceId}/channel/${id}`}>
+            <Link href={`/workspace/${workspaceId}/channels/${id}`}>
                 <Icon className="size-4"/>
                 <span className="text-sm truncate">{label}</span>
             </Link>
