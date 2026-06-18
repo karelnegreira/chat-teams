@@ -6,6 +6,7 @@ import { useWorkspaceId } from "@/hooks/use-workspace-id"
 import { WorkspaceHeader } from './workspace-header';
 import { SidebarItems } from './sidebar-items';
 import { useGetChannels } from '@/features/channels/api/use-get-channels';
+import { WorkspaceSection } from './workspace-section';
 
 
 export const WorkspaceSidebar = () => {
@@ -48,14 +49,20 @@ export const WorkspaceSidebar = () => {
                 id="drafts"
                 icon={SendHorizontal}
             />
-            {channels?.map((item) => (
-                <SidebarItems 
-                    key={item._id}
-                    icon={HashIcon}
-                    label={item.name}
-                    id={item._id}
-                />
-            ))}
+            <WorkspaceSection
+                label="Channels"
+                hint="New channels"
+                onNew={() => {}}
+            >
+                {channels?.map((item) => (
+                    <SidebarItems 
+                        key={item._id}
+                        icon={HashIcon}
+                        label={item.name}
+                        id={item._id}
+                    />
+                ))}
+            </WorkspaceSection>
         </div>
     </div>
   )
