@@ -5,6 +5,7 @@ import { useToggle } from 'react-use';
 
 import { Button } from "@/components/ui/button";
 import { Hint } from '@/components/hint';
+import { cn } from '@/lib/utils';
 
 interface WorkspaceSectonProps {
     children: React.ReactNode; 
@@ -25,7 +26,10 @@ export const WorkspaceSection = ({children, label, hint, onNew}: WorkspaceSecton
                     className="p-0.5 text-sm text-[#f9edffcc] shrink-0 size-6"
                     onClick={toggle}
                 >
-                    <FaCaretDown className="size-4"/>
+                    <FaCaretDown className={cn(
+                        "size-4 transition-transform", 
+                        on && "-rotate-90"
+                        )}/>
                 </Button>
                 <Button
                     variant="transparent"
