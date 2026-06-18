@@ -36,7 +36,7 @@ export const WorkspaceSection = ({children, label, hint, onNew}: WorkspaceSecton
                             size="iconSm"
                             className="opacity-0 group-hover:opacity-100 transition-opacity ml-auto p-0.5 text-sm text-[#f9edffcc] size-6 shrink-0"
                         >
-                            <PlusIcon />
+                            <PlusIcon className="size-5" />
                         </Button>
                     </Hint>
                 )}

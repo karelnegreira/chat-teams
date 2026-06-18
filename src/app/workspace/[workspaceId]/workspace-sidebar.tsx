@@ -49,6 +49,7 @@ export const WorkspaceSidebar = () => {
                 id="drafts"
                 icon={SendHorizontal}
             />
+            </div>
             <WorkspaceSection
                 label="Channels"
                 hint="New channels"
@@ -63,7 +64,6 @@ export const WorkspaceSidebar = () => {
                     />
                 ))}
             </WorkspaceSection>
-        </div>
     </div>
   )
 }
