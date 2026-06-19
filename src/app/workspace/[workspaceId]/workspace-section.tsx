@@ -34,7 +34,7 @@ export const WorkspaceSection = ({children, label, hint, onNew}: WorkspaceSecton
                 <Button
                     variant="transparent"
                     size="sm"
-                    className="group px-1.5 text-sm text-[#f9edffcc] h-[28px] justify-start overflow-hidden items-center"
+                    className=" flex-1 group px-1.5 text-sm text-[#f9edffcc] h-[28px] justify-start overflow-hidden items-center"
                 >
                     <span className="truncate">{label}</span>
                 </Button>
