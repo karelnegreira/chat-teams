@@ -18,20 +18,21 @@ export const create = mutation({
 
         const member = await ctx.db
                 .query("members")
-                .withIndex("by_workspace_id_user_id", 
-                (q) => q.eq("workspaceId", args.workspaceId)
+                .withIndex("by_workspace_id_user_id", (q) => q.eq("workspaceId", args.workspaceId)
                 .eq("userId", userId), 
-                ).unique();
+                )
+                .unique();
 
-        if (!member || member.rol !== 'admin') {
+        if (!member || member.role !== "admin") {
             throw new Error("Unauthorized")
         }
 
-        const parseName = args.name.replace(/\s+/g, "-").toLowerCase()
+        const parsedName = args.name.replace(/\s+/g,"-").toLowerCase()
+        
 
         const channelId = await ctx.db.insert("channels", {
-            name: parseName, 
-            workspaceId: args.workspaceId
+            name: parsedName, 
+            workspaceId: args.workspaceId, 
         });
 
         return channelId;

@@ -26,14 +26,6 @@ export const useCreateChannel = () => {
     const isError = useMemo(() => status === "error", [status]);
     const isSettled = useMemo(() => status === "settled", [status]);
 
-
-    
-    // const [isPending, setIsPending] = useState(false);
-    // const [isSuccess, setIsSuccess] = useState(false);
-    // const [isError, setIsError] = useState(false);
-    // const [isSettled, setIsSettled] = useState(false);
-
-
     const mutation = useMutation(api.channels.create);
 
     const mutate = useCallback(async (values: RequestType, options?: Options) => {
@@ -42,8 +34,15 @@ export const useCreateChannel = () => {
             setData(null);
             setError(null);
             setStatus("pending");
-
+            
+            console.log("Calling mutation", values)
+            
             const response = await mutation(values);
+
+            console.log("mutation returned", response)
+
+            setData(response)
+            setStatus('success')
             options?.onSuccess?.(response);
             return response;
         } catch(error) {

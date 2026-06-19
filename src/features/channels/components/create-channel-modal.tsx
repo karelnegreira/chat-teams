@@ -12,8 +12,12 @@ import {
 
 import { Input } from '@/components/ui/input';
 import { useCreateChannelModal } from '../store/use-create-channel-modal';
+import { useCreateChannel } from '../api/use-create-channel';
+import { useWorkspaceId } from '@/hooks/use-workspace-id';
 
 export const CreateChannelModal = () => {
+    const workspaceId = useWorkspaceId();
+    const { mutate, isPending } = useCreateChannel();
     const [open, setOpen] = useCreateChannelModal();
     const [name, setName] = useState("")
 
@@ -27,29 +31,44 @@ export const CreateChannelModal = () => {
         setOpen(false)
     }
 
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        mutate (
+            {name, workspaceId}, 
+            {
+                onSuccess: (id) => {
+                    //TODO: redirect to new channel
+                    handleClose();
+                },
+            },
+        );
+    };
+
     return (
         <Dialog open={open} onOpenChange={handleClose}>
             <DialogContent className="bg-white">
                     <DialogHeader>
                         <DialogTitle>Add channel</DialogTitle>
                     </DialogHeader>
-                    <form className="space-y-4">
+                    <form onSubmit={handleSubmit} className="space-y-4">
                         <Input 
                             value={name}
-                            disabled={false}
+                            disabled={isPending}
                             onChange={handleChange}
                             required
                             autoFocus
                             minLength={3}
                             maxLength={80}
                             placeholder="e.g plan-budget"
+
                         />
+                        <div className="flex justify-end">
+                            <Button disabled={false}>
+                                Create
+                            </Button>   
+                        </div>
                     </form>
-                    <div className="flex justify-end">
-                        <Button disabled={false}>
-                            Create
-                        </Button>
-                    </div>
+                    
                 </DialogContent>
         </Dialog>
     )
