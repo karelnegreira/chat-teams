@@ -1,4 +1,7 @@
+
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
+
 import {
     Dialog,    
     DialogContent,
@@ -6,12 +9,17 @@ import {
     DialogTitle,
     DialogDescription,
   } from '@/components/ui/dialog'; 
-import { Input } from '@/components/ui/input';
 
+import { Input } from '@/components/ui/input';
 import { useCreateChannelModal } from '../store/use-create-channel-modal';
 
 export const CreateChannelModal = () => {
     const [open, setOpen] = useCreateChannelModal();
+    const [name, setName] = useState("")
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value.replace(/\s+/g, "-").toLowerCase();
+    }
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
