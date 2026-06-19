@@ -19,19 +19,25 @@ export const CreateChannelModal = () => {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value.replace(/\s+/g, "-").toLowerCase();
+        setName(value)
+    };
+
+    const handleClose = () => {
+        setName("")
+        setOpen(false)
     }
 
     return (
-        <Dialog open={open} onOpenChange={setOpen}>
+        <Dialog open={open} onOpenChange={handleClose}>
             <DialogContent className="bg-white">
                     <DialogHeader>
                         <DialogTitle>Add channel</DialogTitle>
                     </DialogHeader>
                     <form className="space-y-4">
                         <Input 
-                            value=""
+                            value={name}
                             disabled={false}
-                            onChange={() => {}}
+                            onChange={handleChange}
                             required
                             autoFocus
                             minLength={3}
