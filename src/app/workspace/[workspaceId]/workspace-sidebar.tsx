@@ -8,6 +8,7 @@ import { SidebarItems } from './sidebar-items';
 import { useGetChannels } from '@/features/channels/api/use-get-channels';
 import { WorkspaceSection } from './workspace-section';
 import { useGetMembers } from '@/features/members/api/use-get-members';
+import { UserItem } from './user-item';
 
 
 export const WorkspaceSidebar = () => {
@@ -67,9 +68,12 @@ export const WorkspaceSidebar = () => {
                 ))}
             </WorkspaceSection>
             {members?.map((item) => (
-                <div>
-                    {item.user.name}
-                </div>
+                <UserItem 
+                    key={item._id}
+                    id={item._id}
+                    label={item.user.name}
+                    image={item.user.image}  
+                />
             ))}
     </div>
   )
