@@ -63,7 +63,7 @@ export const CreateChannelModal = () => {
 
                         />
                         <div className="flex justify-end">
-                            <Button disabled={false}>
+                            <Button disabled={isPending}>
                                 Create
                             </Button>   
                         </div>
