@@ -27,6 +27,17 @@ export const InviteModal = ({open, setOpen, name, joinCode}: InviteModalProps) =
 
     const { mutate, isPending } = useNEwJoinCode();
 
+    const handleNewCode = () => {
+        mutate({workspaceId}, {
+            onSuccess: () => {
+                toast.success("Invite code regenerated")
+            }, 
+            onError: () => {
+                toast.error("Failed to regenerate invite code")
+            }
+        });
+    }
+
 
     const handleCopy = () => {
         const invitelink = `${window.location.origin}/join/${workspaceId}`;
@@ -59,7 +70,7 @@ export const InviteModal = ({open, setOpen, name, joinCode}: InviteModalProps) =
                     </Button>
                 </div>
                 <div className="flex items-center justify-between w-full ">
-                    <Button onClick={() => {}} variant="outline">
+                    <Button onClick={handleNewCode} variant="outline">
                         New code 
                         <RefreshCcw/>
                     </Button>
