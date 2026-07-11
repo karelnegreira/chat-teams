@@ -54,7 +54,8 @@ import { JSXElementConstructor, useState } from 'react';
 
                         </Button>
                         <Button
-                            onClick={handleCancel}
+                            className='bg-black text-white font-mono'
+                            onClick={handleConfirm}
                         >
                             Confirm
 

@@ -79,9 +79,9 @@ export const InviteModal = ({open, setOpen, name, joinCode}: InviteModalProps) =
                         </Button>
                     </div>
                     <div className="flex items-center justify-between w-full ">
-                        <Button onClick={handleNewCode} variant="outline">
+                        <Button disabled={isPending} onClick={handleNewCode} variant="outline">
                             New code 
-                            <RefreshCcw/>
+                            <RefreshCcw className="size-4 ml-2"/>
                         </Button>
                         <DialogClose asChild>
                             <Button>Close</Button>
