@@ -36,7 +36,7 @@ import { JSXElementConstructor, useState } from 'react';
     const ConfirmDialog = () => {
         return (
             <Dialog open={promise !== null}>
-                <DialogContent>
+                <DialogContent className="bg-white border-2 border-black shadow-xl">
                     <DialogHeader>
                         <DialogTitle>
                             {title}
