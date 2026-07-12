@@ -1,9 +1,22 @@
 "use client"
 
+import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import VerificationInput from 'react-verification-input';
+import  Link from 'next/link';
+import { useWorkspaceId } from '@/hooks/use-workspace-id';
+
+interface JoinPageProps {
+    params: {
+        workspaceId: string, 
+    }
+}
 
 const JoinPage = () => {
+    const workspaceId = useWorkspaceId();
+
+    
+
     return (
         <div className="h-full flex flex-col gap-y-8 items-center justify-center bg-white p-8 rounded-lg shadow-sm">
             <Image src="/logo.svg" width={60} height={60} alt="Logo"/>
@@ -17,11 +30,23 @@ const JoinPage = () => {
                     </p>
                 </div>
                 <VerificationInput 
+                    length={6}
                     classNames={{
                         container: "flex gap-x-2", 
-                        character: "uppercase h-auto rounded-md border border-gray-300 flex items-center justify-center text-lg font-medium text-gray-500"
+                        character: "uppercase h-auto rounded-md border border-gray-300 flex items-center justify-center text-lg font-medium text-gray-500", 
+                        characterInactive: "bg-muted", 
+                        characterSelected: "bg-white text-black", 
+                        characterFilled: "bg-white text-black"
                     }}
+                    autoFocus
                 />
+            </div>
+            <div className="flex gap-x-4">
+                <Button size="lg" variant="outline" asChild>
+                    <Link href="/">
+                        Home page 
+                    </Link>
+                </Button>
             </div>
         </div>
     )
