@@ -16,7 +16,12 @@ const JoinPage = () => {
                         Enter the workspace code to join
                     </p>
                 </div>
-                <VerificationInput />
+                <VerificationInput 
+                    classNames={{
+                        container: "flex gap-x-2", 
+                        character: "uppercase h-auto rounded-md border border-gray-300 flex items-center justify-center text-lg font-medium text-gray-500"
+                    }}
+                />
             </div>
         </div>
     )
