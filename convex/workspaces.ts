@@ -40,7 +40,7 @@ export const join = mutation({
             )
             .unique()
         
-        if (existingMember) {
+        if (!existingMember) {
             throw new Error("Already a member of this workspace")
         }
 
