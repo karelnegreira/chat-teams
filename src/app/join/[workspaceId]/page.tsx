@@ -1,10 +1,12 @@
 "use client"
 
+import { Loader } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import VerificationInput from 'react-verification-input';
 import  Link from 'next/link';
 import { useWorkspaceId } from '@/hooks/use-workspace-id';
+import { useGetWorkspaceInfo } from '@/features/workspaces/api/user-get-workspace-info';
 
 interface JoinPageProps {
     params: {
@@ -15,7 +17,15 @@ interface JoinPageProps {
 const JoinPage = () => {
     const workspaceId = useWorkspaceId();
 
-    
+    const {data, isLoading} = useGetWorkspaceInfo({id: workspaceId})
+
+    if (isLoading) {
+        return (
+            <div className="h-full flex items-center justify-center">
+                <Loader className="size-6 animate-spin text-muted-foreground"/>
+            </div>
+        )
+    }
 
     return (
         <div className="h-full flex flex-col gap-y-8 items-center justify-center bg-white p-8 rounded-lg shadow-sm">
@@ -23,7 +33,7 @@ const JoinPage = () => {
             <div className="flex flex-col gap-y-4 items-center justify-center max-w-md">
                 <div className="flex flex-col gap-y-2 items-center justify-center">
                     <h1 className="text-2xl font-bold">
-                        Join workspace
+                        Join {data?.name}
                     </h1>
                     <p className="text-md text-muted-foreground">
                         Enter the workspace code to join
