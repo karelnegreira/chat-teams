@@ -2,15 +2,16 @@
 
 import {useRouter} from 'next/navigation';
 import { Loader } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import VerificationInput from 'react-verification-input';
 import  Link from 'next/link';
+import { toast } from 'sonner';
+
+import { cn } from '@/lib/utils';
 import { useWorkspaceId } from '@/hooks/use-workspace-id';
 import { useGetWorkspaceInfo } from '@/features/workspaces/api/user-get-workspace-info';
 import { useJoin } from '@/features/workspaces/api/use-join';
-import { toast } from 'sonner';
-import Router from '../../../../node_modules/next/router';
+import { Button } from '@/components/ui/button';
 
 interface JoinPageProps {
     params: {
@@ -63,7 +64,7 @@ const JoinPage = () => {
                     onComplete={handleComplete}
                     length={6}
                     classNames={{
-                        container: "flex gap-x-2", 
+                        container: cn("flex gap-x-2", isPending && "opacity-50 cursor-not-allowed"), 
                         character: "uppercase h-auto rounded-md border border-gray-300 flex items-center justify-center text-lg font-medium text-gray-500", 
                         characterInactive: "bg-muted", 
                         characterSelected: "bg-white text-black", 
