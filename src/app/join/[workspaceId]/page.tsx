@@ -1,5 +1,6 @@
 "use client"
 
+import { useMemo, useEffect } from 'react';
 import {useRouter} from 'next/navigation';
 import { Loader } from 'lucide-react';
 import Image from 'next/image';
@@ -12,6 +13,7 @@ import { useWorkspaceId } from '@/hooks/use-workspace-id';
 import { useGetWorkspaceInfo } from '@/features/workspaces/api/user-get-workspace-info';
 import { useJoin } from '@/features/workspaces/api/use-join';
 import { Button } from '@/components/ui/button';
+
 
 interface JoinPageProps {
     params: {
@@ -27,6 +29,14 @@ const JoinPage = () => {
     const {mutate, isPending} = useJoin();
 
     const { data, isLoading } = useGetWorkspaceInfo({id: workspaceId})
+
+    const isMember = useMemo(() => data?.isMember, [data?.isMember])
+
+    useEffect(() => {
+        if (isMember) {
+            router.push(`/workspace/${workspaceId}`);
+        }
+    }, [])
 
     const handleComplete = (value: string) => {
         mutate({workspaceId, joinCode: value }, {
