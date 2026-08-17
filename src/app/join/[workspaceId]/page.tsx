@@ -36,7 +36,7 @@ const JoinPage = () => {
         if (isMember) {
             router.push(`/workspace/${workspaceId}`);
         }
-    }, [])
+    }, [isMember, router, workspaceId])
 
     const handleComplete = (value: string) => {
         mutate({workspaceId, joinCode: value }, {
