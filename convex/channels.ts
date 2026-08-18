@@ -5,7 +5,6 @@ import { mutation, query } from './_generated/server';
 
 export const update = mutation({
     args: {id: v.id("channels"), 
-    workspaceId: v.id("workspaces"), 
     name: v.string()
     }, 
     handler: async (ctx, args) => {
@@ -15,9 +14,16 @@ export const update = mutation({
             throw new Error("Unauthorized")
         }
 
+        const channel = ctx.db.get(args.id)
+
+        if (!channel) {
+            throw new Error("Channel not found")
+        }
+
         const member = await ctx.db
                 .query("members")
-                .withIndex("by_workspace_id_user_id", (q) => q.eq("workspaceId", args.workspaceId)
+                .withIndex("by_workspace_id_user_id", 
+                (q) => q.eq("workspaceId", channel.workspaceId)
                 .eq("userId", userId), 
                 )
                 .unique();
