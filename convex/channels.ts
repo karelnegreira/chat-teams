@@ -52,7 +52,7 @@ export const remove = mutation({
             throw new Error("Unauthorized")
         }
 
-        const channel = ctx.db.get(args.id)
+        const channel = await ctx.db.get(args.id)
 
         if (!channel) {
             throw new Error("Channel not found")
