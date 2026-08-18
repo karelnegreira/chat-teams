@@ -3,7 +3,7 @@ import {FaChevronDown} from 'react-icons/fa';
 import { TrashIcon } from 'lucide-react';
 
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { useState } from 'react';
 import { Input } from '@/components/ui/input';
 
@@ -53,7 +53,7 @@ export  const Header = ({ name }: HeaderProps) => {
                                 Rename this channel
                             </DialogTitle>
                         </DialogHeader>
-                        <form>
+                        <form className="flex flex-col gap-y-6">
                             <Input
                                 value={value}
                                 disabled={false}
@@ -64,6 +64,16 @@ export  const Header = ({ name }: HeaderProps) => {
                                 maxLength={80}
                                 placeholder="e.g plan-budget"
                             />
+                            <DialogFooter>
+                                <DialogClose asChild>
+                                    <Button variant='outline' disabled={false}>
+                                        Cancel
+                                    </Button>
+                                </DialogClose>
+                                <Button>
+                                    Save
+                                </Button>
+                            </DialogFooter>
                         </form>
                     </DialogContent>
                 </Dialog>
