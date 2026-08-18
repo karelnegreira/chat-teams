@@ -5,6 +5,7 @@ import { TrashIcon } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { useState } from 'react';
+import { Input } from '@/components/ui/input';
 
 interface HeaderProps {
     name: string;
@@ -52,6 +53,18 @@ export  const Header = ({ name }: HeaderProps) => {
                                 Rename this channel
                             </DialogTitle>
                         </DialogHeader>
+                        <form>
+                            <Input
+                                value={value}
+                                disabled={false}
+                                onChange={() => {}}
+                                required
+                                autoFocus
+                                minLength={3}
+                                maxLength={80}
+                                placeholder="e.g plan-budget"
+                            />
+                        </form>
                     </DialogContent>
                 </Dialog>
                 <button className="flex items-center gap-x-2 px-5 py-4 bg-white rounded-lg cursor-pointer border hover:bg-gray-50 text-rose-500">
