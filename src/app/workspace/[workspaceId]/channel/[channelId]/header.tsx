@@ -116,7 +116,7 @@ export  const Header = ({ name }: HeaderProps) => {
                         </div>
                     </DialogTrigger>
                     <DialogContent className="bg-white border shadow-lg">
-                        <DialogHeader>
+                        <DialogHeader className="p-4 border-b bg-white">
                             <DialogTitle>
                                 Rename this channel
                             </DialogTitle>
