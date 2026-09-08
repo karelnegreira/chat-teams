@@ -2,6 +2,7 @@
 import Quill, { QuillOptions }from 'quill'
 import "quill/dist/quill.snow.css";
 import { PiTextAa } from 'react-icons/pi';
+import {Smile} from 'lucide-react';
 import { useEffect, useRef } from 'react';
 import { Button } from './ui/button';
 
@@ -40,7 +41,15 @@ const Editor = () => {
                         variant='ghost'
                         onClick={() => {}}
                     >
-                        <PiTextAa />
+                        <PiTextAa className="size-4"/>
+                    </Button>
+                    <Button
+                        disabled={false}
+                        size="iconSm"
+                        variant='ghost'
+                        onClick={() => {}}
+                    >
+                        <Smile className="size-4"/>
                     </Button>
                 </div>
             </div>
