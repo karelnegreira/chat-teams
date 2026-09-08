@@ -1,7 +1,9 @@
 
 import Quill, { QuillOptions }from 'quill'
 import "quill/dist/quill.snow.css";
+import { PiTextAa } from 'react-icons/pi';
 import { useEffect, useRef } from 'react';
+import { Button } from './ui/button';
 
 const Editor = () => {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -31,6 +33,16 @@ const Editor = () => {
         <div className="flex flex-col">
             <div className="flex flex-col border border-slate-200 rounded-md overflow-hidden focus-within:border-slate-300 focus-within:shadow-sm transition bg-white">
                 <div ref={containerRef} className="h-full ql-custom"/>
+                <div className="flex px-2 pb-2 z-[5]">
+                    <Button
+                        disabled={false}
+                        size="iconSm"
+                        variant='ghost'
+                        onClick={() => {}}
+                    >
+                        <PiTextAa />
+                    </Button>
+                </div>
             </div>
         </div>
     )
