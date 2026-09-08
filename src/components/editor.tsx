@@ -48,22 +48,26 @@ const Editor = () => {
                             <PiTextAa className="size-4"/>
                         </Button>
                     </Hint>
-                    <Button
-                        disabled={false}
-                        size="iconSm"
-                        variant='ghost'
-                        onClick={() => {}}
-                    >
-                        <Smile className="size-4"/>
-                    </Button>
-                    <Button
-                        disabled={false}
-                        size="iconSm"
-                        variant='ghost'
-                        onClick={() => {}}
-                    >
-                        <ImageIcon className="size-4"/>
-                    </Button>
+                    <Hint label="Emoji">
+                        <Button
+                            disabled={false}
+                            size="iconSm"
+                            variant='ghost'
+                            onClick={() => {}}
+                        >
+                            <Smile className="size-4"/>
+                        </Button>
+                    </Hint>
+                    <Hint label="Attachments">
+                        <Button
+                            disabled={false}
+                            size="iconSm"
+                            variant='ghost'
+                            onClick={() => {}}
+                        >
+                            <ImageIcon className="size-4"/>
+                        </Button>
+                    </Hint>
                     <Button 
                         disabled={false}
                         onClick={() => {}}
