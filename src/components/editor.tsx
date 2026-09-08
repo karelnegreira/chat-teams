@@ -2,7 +2,8 @@
 import Quill, { QuillOptions }from 'quill'
 import "quill/dist/quill.snow.css";
 import { PiTextAa } from 'react-icons/pi';
-import {Smile} from 'lucide-react';
+import { MdSend } from 'react-icons/md';
+import {Smile, ImageIcon} from 'lucide-react';
 import { useEffect, useRef } from 'react';
 import { Button } from './ui/button';
 
@@ -50,6 +51,17 @@ const Editor = () => {
                         onClick={() => {}}
                     >
                         <Smile className="size-4"/>
+                    </Button>
+                    <Button
+                        disabled={false}
+                        size="iconSm"
+                        variant='ghost'
+                        onClick={() => {}}
+                    >
+                        <ImageIcon className="size-4"/>
+                    </Button>
+                    <Button>
+                        <MdSend />
                     </Button>
                 </div>
             </div>
