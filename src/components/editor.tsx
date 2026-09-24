@@ -4,7 +4,7 @@ import { Delta, Op } from "quill/core";
 import { PiTextAa } from 'react-icons/pi';
 import { MdSend } from 'react-icons/md';
 import {Smile, ImageIcon} from 'lucide-react';
-import { MutableRefObject, useEffect, useRef } from 'react';
+import { MutableRefObject, useEffect, useLayoutEffect, useRef } from 'react';
 
 import { Button } from './ui/button';
 import { Hint } from './hint';
@@ -36,11 +36,18 @@ const Editor = ( {
     variant= "create" }: EditorProps) => {
 
     const containerRef = useRef<HTMLDivElement>(null);
-
     const submitRef = useRef(onSubmit)
     const placeholderRef = useRef(placeholder)
     const quillRef = useRef<Quill | null>(null)
     const defaulValueRef = useRef(defaultValue)
+    const disabledRef = useRef(disabled)
+
+    useLayoutEffect(() => {
+        submitRef.current = onSubmit;
+        placeholderRef.current = placeholder;
+        defaulValueRef.current = defaultValue;
+        disabledRef.current = disabled;
+    });
 
     useEffect(() => {
         if (!containerRef.current) return;
