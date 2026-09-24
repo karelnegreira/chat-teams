@@ -1,19 +1,40 @@
 
-import Quill, { QuillOptions }from 'quill'
+import Quill, { QuillOptions }from 'quill';
+import { Delta, Op } from "quill/core";
 import { PiTextAa } from 'react-icons/pi';
 import { MdSend } from 'react-icons/md';
 import {Smile, ImageIcon} from 'lucide-react';
-import { useEffect, useRef } from 'react';
+import { MutableRefObject, useEffect, useRef } from 'react';
 
 import { Button } from './ui/button';
 import { Hint } from './hint';
 import "quill/dist/quill.snow.css";
+import { imageConfigDefault } from '../../node_modules/next/dist/shared/lib/image-config';
+
+type EditorValue = {
+    image: File | null;
+    body: string;
+}
 
 interface EditorProps {
+    onSubmit: ({image, body}: EditorValue) => void;
+    onCancel?: () => void;
+    placeholder?: string;
+    defaultValue?: Delta | Op[];
+    disabled?: boolean;
+    innerRef?: MutableRefObject<Quill | null>;
     variant?: "create" | "update"
 };
 
-const Editor = ( { variant= "create" }: EditorProps) => {
+const Editor = ( {
+    onCancel,
+    onSubmit,
+    placeholder="Message e.g hello",
+    defaultValue = [], 
+    disabled=false, 
+    innerRef, 
+    variant= "create" }: EditorProps) => {
+        
     const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
