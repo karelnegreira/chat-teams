@@ -59,6 +59,7 @@ const Editor = ( {
 
         const options: QuillOptions = {
             theme: "snow", 
+            placeholder: placeholderRef.current,
         }   
 
         const quill = new Quill(editorContainer, options)
