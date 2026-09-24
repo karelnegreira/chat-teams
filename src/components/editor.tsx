@@ -34,8 +34,13 @@ const Editor = ( {
     disabled=false, 
     innerRef, 
     variant= "create" }: EditorProps) => {
-        
+
     const containerRef = useRef<HTMLDivElement>(null);
+
+    const submitRef = useRef(onSubmit)
+    const placeholderRef = useRef(placeholder)
+    const quillRef = useRef<Quill | null>(null)
+    const defaulValueRef = useRef(defaultValue)
 
     useEffect(() => {
         if (!containerRef.current) return;
