@@ -95,7 +95,8 @@ const Editor = ( {
         };
     }, [innerRef])
 
-    const isEmpty = text.replace(/<(.|\n)*?>/g, "").trim().length === 0
+    const isEmpty = text.replace(/<(.|\n)*?>/g, "").trim().length === 0;
+    console.log({isEmpty, text})
 
     return (
         <div className="flex flex-col">
@@ -127,7 +128,7 @@ const Editor = ( {
                     {variant==="create" && (
                         <Hint label="Attachments">
                             <Button
-                                disabled={false}
+                                disabled={disabled || isEmpty}
                                 size="iconSm"
                                 variant='ghost'
                                 onClick={() => {}}
