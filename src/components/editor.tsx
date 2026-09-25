@@ -4,7 +4,7 @@ import { Delta, Op } from "quill/core";
 import { PiTextAa } from 'react-icons/pi';
 import { MdSend } from 'react-icons/md';
 import {Smile, ImageIcon} from 'lucide-react';
-import { MutableRefObject, useEffect, useLayoutEffect, useRef } from 'react';
+import { MutableRefObject, useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 import { Button } from './ui/button';
 import { Hint } from './hint';
@@ -35,6 +35,8 @@ const Editor = ( {
     innerRef, 
     variant= "create" }: EditorProps) => {
 
+    const [text, setText] = useState("")
+
     const containerRef = useRef<HTMLDivElement>(null);
     const submitRef = useRef(onSubmit)
     const placeholderRef = useRef(placeholder)
@@ -63,14 +65,37 @@ const Editor = ( {
         }   
 
         const quill = new Quill(editorContainer, options)
-        
+        quillRef.current = quill
+        quillRef.current.focus()
+
+        if(innerRef) {
+            innerRef.current = quill;
+        }
+
+        quill.setContents(defaulValueRef.current)
+        setText(quill.getText())
+
+        quill.on(Quill.events.TEXT_CHANGE, () => {
+            setText(quill.getText());
+        });
 
         return () => {
+            quill.off(Quill.events.TEXT_CHANGE)
             if (container) {
                 container.innerHTML = "";
             }
-        }
-    }, [])
+
+            if (quillRef.current) {
+                quillRef.current = null
+            }
+
+            if (innerRef) {
+                innerRef.current = null
+            }
+        };
+    }, [innerRef])
+
+    const isEmpty = text.replace(/<(.|\n)*?>/g, "").trim().length === 0
 
     return (
         <div className="flex flex-col">
