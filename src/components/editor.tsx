@@ -63,6 +63,7 @@ const Editor = ( {
         }   
 
         const quill = new Quill(editorContainer, options)
+        
 
         return () => {
             if (container) {
