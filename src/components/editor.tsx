@@ -66,7 +66,8 @@ const Editor = ( {
             modules: {
                 toolbar: [
                     ["bold", "italic", "strike"], 
-                    ["link"]
+                    ["link"], 
+                    [{list: "ordered"}, {list: "bullet"}]
                 ],
                 keyboard: {
                     bindings: {
