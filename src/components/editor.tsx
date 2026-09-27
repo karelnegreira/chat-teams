@@ -64,6 +64,10 @@ const Editor = ( {
             theme: "snow", 
             placeholder: placeholderRef.current,
             modules: {
+                toolbar: [
+                    ["bold", "italic", "strike"], 
+                    ["link"]
+                ],
                 keyboard: {
                     bindings: {
                         enter: {
