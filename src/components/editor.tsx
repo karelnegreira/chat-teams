@@ -159,7 +159,7 @@ const Editor = ( {
                     )}
                     {variant==="create" && (
                         <Button 
-                            disabled={false}
+                            disabled={disabled || isEmpty}
                             onClick={() => {}}
                             size='iconSm'
                             className="ml-auto bg-[#007a5a] hover:bg-[#007a5a]/80 text-white">
