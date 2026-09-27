@@ -16,10 +16,10 @@ const ChatInput = ({placeholder}: ChatInputProps) => {
   return (
     <div className="px-5 w-full">
         <Editor
-          placeholder={placeholder}
-          onSubmit={() => {}}
-          disabled={false}
-          innerRef={editorRef}
+            placeholder={placeholder}
+            onSubmit={() => {}}
+            disabled={false}
+            innerRef={editorRef}
         />
 
     </div>
