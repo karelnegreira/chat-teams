@@ -10,6 +10,7 @@ import { Button } from './ui/button';
 import { Hint } from './hint';
 import "quill/dist/quill.snow.css";
 import { imageConfigDefault } from '../../node_modules/next/dist/shared/lib/image-config';
+import { cn } from '@/lib/utils';
 
 type EditorValue = {
     image: File | null;
@@ -162,7 +163,12 @@ const Editor = ( {
                             disabled={disabled || isEmpty}
                             onClick={() => {}}
                             size='iconSm'
-                            className="ml-auto bg-[#007a5a] hover:bg-[#007a5a]/80 text-white">
+                            className={cn(
+                                "ml-auto",
+                                isEmpty 
+                                ? "ml-auto bg-white hover:bg-white text-muted-foreground"
+                                : "ml-auto bg-[#007a5a] hover:bg-[#007a5a]/80 text-white"
+                                )}>
                             <MdSend className="size-4" />
                         </Button>
                     )}
