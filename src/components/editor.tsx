@@ -11,6 +11,7 @@ import { Hint } from './hint';
 import "quill/dist/quill.snow.css";
 import { imageConfigDefault } from '../../node_modules/next/dist/shared/lib/image-config';
 import { cn } from '@/lib/utils';
+import { Input } from './ui/input';
 
 type EditorValue = {
     image: File | null;
@@ -38,13 +39,15 @@ const Editor = ( {
 
     const [text, setText] = useState("")
     const [isToolbarVisible, setIsToolbarVisible] = useState(true)
-
+    const [image, setImage] = useState<File | null>(null);
     const containerRef = useRef<HTMLDivElement>(null);
     const submitRef = useRef(onSubmit)
     const placeholderRef = useRef(placeholder)
     const quillRef = useRef<Quill | null>(null)
     const defaulValueRef = useRef(defaultValue)
     const disabledRef = useRef(disabled)
+
+    const imageElementRef = useRef<HTMLInputElement>(null)
 
     useLayoutEffect(() => {
         submitRef.current = onSubmit;
@@ -144,6 +147,13 @@ const Editor = ( {
 
     return (
         <div className="flex flex-col">
+            <Input
+                type="file"
+                accept="image/*"
+                ref={imageElementRef}
+                onChange={(event) => setImage(event.target.files![0])}
+                className="hidden"
+            />
             <div className="flex flex-col border border-slate-200 rounded-md overflow-hidden focus-within:border-slate-300 focus-within:shadow-sm transition bg-white">
                 <div ref={containerRef} className="h-full ql-custom"/>
                 <div className="flex px-2 pb-2 z-[5]">
@@ -169,12 +179,12 @@ const Editor = ( {
                         </Button>
                     </EmojiPopover>
                     {variant==="create" && (
-                        <Hint label="Attachments">
+                        <Hint label="Image">
                             <Button
-                                disabled={disabled || isEmpty}
+                                disabled={disabled}
                                 size="iconSm"
                                 variant='ghost'
-                                onClick={() => {}}
+                                onClick={() => imageElementRef.current?.click()}
                             >
                                 <ImageIcon className="size-4"/>
                             </Button>
