@@ -26,6 +26,15 @@ export const EmojiPopover = ({ children, hint="Emoji", onEmojiSelect }: EmojiPop
     
     const [popoverOpen, setPopoverOpen] = useState(false)
     const [tooltipOpen, setTooltipOpen] = useState(false)
+
+    const onSelect = (emoji: any) => {
+        onEmojiSelect(emoji);
+        setPopoverOpen(false);
+
+        setTimeout(() => {
+            setTooltipOpen(false)
+        }, 500)
+    }
     
     return (
         <TooltipProvider>
