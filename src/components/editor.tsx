@@ -5,7 +5,7 @@ import { PiTextAa } from 'react-icons/pi';
 import { MdSend } from 'react-icons/md';
 import {Smile, ImageIcon} from 'lucide-react';
 import { MutableRefObject, useEffect, useLayoutEffect, useRef, useState } from 'react';
-
+import { EmojiPopover } from './emoji-popover';
 import { Button } from './ui/button';
 import { Hint } from './hint';
 import "quill/dist/quill.snow.css";
@@ -152,7 +152,7 @@ const Editor = ( {
                         </Button>
                     </Hint>
 
-                    <Hint label="Emoji">
+                    <EmojiPopover onEmojiSelect={() => {}}>
                         <Button
                             disabled={disabled}
                             size="iconSm"
@@ -161,7 +161,7 @@ const Editor = ( {
                         >
                             <Smile className="size-4"/>
                         </Button>
-                    </Hint>
+                    </EmojiPopover>
                     {variant==="create" && (
                         <Hint label="Attachments">
                             <Button
