@@ -5,11 +5,12 @@ import { PiTextAa } from 'react-icons/pi';
 import { MdSend } from 'react-icons/md';
 import {Smile, ImageIcon, XIcon} from 'lucide-react';
 import { MutableRefObject, useEffect, useLayoutEffect, useRef, useState } from 'react';
+
+import Image from 'next/image';
 import { EmojiPopover } from './emoji-popover';
 import { Button } from './ui/button';
 import { Hint } from './hint';
 import "quill/dist/quill.snow.css";
-import { imageConfigDefault } from '../../node_modules/next/dist/shared/lib/image-config';
 import { cn } from '@/lib/utils';
 import { Input } from './ui/input';
 
@@ -168,6 +169,12 @@ const Editor = ( {
                             >
                                 <XIcon className="size-3.5"/>
                             </button>
+                            <Image  
+                                src={URL.createObjectURL(image)}
+                                alt="uploaded"
+                                fill
+                                className="rounded-xl overflow-hidden border object-cover"
+                            />
                         </div>
 
                     </div>
