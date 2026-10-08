@@ -28,5 +28,25 @@ export const create = mutation({
         if (!userId) {
             throw new Error("Unauthorized")
         }
+
+        const member = await getMember(ctx, args.workspaceId, userId)
+
+        if (!member) {
+            return new Error("Unauthorized")
+        }
+
+        //handle conversation id
+
+        const messageId = await ctx.db.insert("messages", {
+            memberId: member.id, 
+            body: args.body, 
+            image: args.image, 
+            channelId: args.channelId, 
+            workspaceId: args.workspaceId, 
+            parentMessageId: args.parentMessageId, 
+            updatedAt: Date.now(),
+        });
+
+        return messageId
     }
 })
