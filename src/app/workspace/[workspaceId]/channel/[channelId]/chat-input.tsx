@@ -28,6 +28,11 @@ const ChatInput = ({placeholder}: ChatInputProps) => {
     image: File | null
   }) => {
      console.log({body, image })
+     createMessage({
+      workspaceId, 
+      channelId, 
+      body,
+     })
   }
 
   return (
