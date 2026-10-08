@@ -2,6 +2,9 @@ import dynamic from 'next/dynamic';
 import { useRef } from 'react';
 
 import { Quill } from 'quill';
+import { useCreateMessage } from '@/features/messages/api/use-create-message';
+import { useChannelId } from '@/hooks/use-channel-id';
+import { useWorkspaceId } from '@/hooks/use-workspace-id';
 
 const Editor = dynamic(() => import("@/components/editor"), {ssr: false})
 
@@ -11,7 +14,11 @@ interface ChatInputProps {
 
 const ChatInput = ({placeholder}: ChatInputProps) => {
 
-  const editorRef = useRef<Quill | null>(null)
+  const editorRef = useRef<Quill | null>(null);
+  const channelId = useChannelId();
+  const workspaceId = useWorkspaceId();
+
+  const {mutate: createMessage} = useCreateMessage();
 
   const handleSubmit = ({
     body, 
