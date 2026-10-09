@@ -38,13 +38,13 @@ export const create = mutation({
         //handle conversation id
 
         const messageId = await ctx.db.insert("messages", {
-            memberId: member.id, 
+            memberId: member._id, 
             body: args.body, 
             image: args.image, 
             channelId: args.channelId, 
             workspaceId: args.workspaceId, 
             parentMessageId: args.parentMessageId, 
-            updatedAt: Date.now(),
+            updateAt: Date.now(),
         });
 
         return messageId
