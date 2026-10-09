@@ -72,14 +72,11 @@ const ChatInput = ({ placeholder }: ChatInputProps) => {
 
         const { storageId } = await result.json()
 
+        values.image = storageId
 
       }
 
-      await createMessage({
-        workspaceId, 
-        channelId, 
-        body,
-      }, {throwError: true });
+      await createMessage( values , {throwError: true });
 
       setEditorKey((prevKey) => prevKey + 1);
     } catch(error) {
