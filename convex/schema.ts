@@ -36,7 +36,7 @@ const schema = defineSchema({
     workspaceId: v.id("workspaces"), 
     channelId: v.optional(v.id("channels")),
     parentMessageId: v.optional(v.id("messages")), 
-    //TODO: add conversation id. 
+    conversationId: v.optional(v.id("conversations")), 
     updateAt: v.number(),
   })
 });
