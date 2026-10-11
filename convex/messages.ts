@@ -7,6 +7,10 @@ const populateUser = (ctx: QueryCtx, userId: Id<"users">) => {
     return ctx.db.get(userId)
 }; 
 
+export const populateMember = (ctx: QueryCtx, memberId: Id<"members">) => {
+    return ctx.db.get(memberId)
+}
+
 
 const getMember = async (ctx: QueryCtx,
                         workspaceId: Id<"workspaces">, 
