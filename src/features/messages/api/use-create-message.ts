@@ -9,7 +9,7 @@ type RequestType = { body: string,
                     workspaceId: Id<"workspaces">, 
                     channelId?: Id<"channels">, 
                     parentMessagesId?: Id<"messages">, 
-                    //TODO: add the conversationId
+                    conversationId?: Id<"conversations">,
                 };
 
 type ResponseType = Id<"messages">;
