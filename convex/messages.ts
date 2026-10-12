@@ -10,6 +10,34 @@ const populateThread = async (ctx: QueryCtx, messageId: Id<"messages">) => {
                              (q) => q.eq("parentMessageId", messageId)
                             )
                             .collect();
+    
+    if (messages.length === 0) {
+        return {
+            count: 0, 
+            image: undefined, 
+            timestamp: 0, 
+        };
+    }
+
+    const lastMessages = messages[messages.length - 1]
+    const lastMessagesMember = await populateMember(ctx, lastMessages.memberId)
+
+    if (!lastMessagesMember) {
+        return {
+            count: 0, 
+            image: undefined, 
+            timestamp: 0, 
+        };
+    }
+
+
+    const lastMessageUser = await populateUser(ctx, lastMessagesMember.userId);
+
+    return {
+        count: messages.length, 
+        image: lastMessageUser?.image, 
+        timestamp: lastMessages._creationTime
+    }
 };
 
 const populateReactions = (ctx: QueryCtx, messageId: Id<"messages">) => {
