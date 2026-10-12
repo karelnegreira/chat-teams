@@ -3,6 +3,15 @@ import { auth } from './auth'
 import { Id } from './_generated/dataModel'
 import { mutation, QueryCtx } from './_generated/server'
 
+const populateThread = async (ctx: QueryCtx, messageId: Id<"messages">) => {
+    const messages = await ctx.db
+                            .query("messages")
+                            .withIndex("by_parent_message_id", 
+                             (q) => q.eq("parentMessageId", messageId)
+                            )
+                            .collect();
+};
+
 const populateReactions = (ctx: QueryCtx, messageId: Id<"messages">) => {
     return ctx.db
             .query("reactions")
