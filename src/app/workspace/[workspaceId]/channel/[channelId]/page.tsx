@@ -6,12 +6,16 @@ import { useGetChannel } from "@/features/channels/api/use-get-channel";
 import { useChannelId } from "@/hooks/use-channel-id";
 import { Header } from './header';
 import ChatInput from './chat-input';
+import { useGetMessages } from '@/features/messages/api/use_get_message';
 
 const ChannelIdPage = () => {
     
     const channelId = useChannelId()
 
+    const { results } = useGetMessages({ channelId })
     const { data: channel, isLoading: channelLoading } = useGetChannel({ id: channelId })
+
+    console.log({results})
 
     if (channelLoading) {
         return (
