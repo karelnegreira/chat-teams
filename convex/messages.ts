@@ -89,8 +89,22 @@ export const get = query({
             if (!parentMessage) {
                 throw new Error("Parent message not found")
             }
+
+            _conversationId = parentMessage.conversationId
         }
 
+        const result = await ctx.db
+                .query("messages")
+                .withIndex("by_channel_id_parent_message_id_conversation_id", (q) => 
+                            q
+                                .eq("channelId", args.channelId)
+                                .eq("parentMessageId", args.parentMessageId)
+                                .eq("conversationId", _conversationId)
+                        )
+                .order("desc")
+                .paginate(args.paginationsOpts);
+        
+        return result;
     },
 });
 
