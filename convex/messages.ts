@@ -3,12 +3,19 @@ import { auth } from './auth'
 import { Id } from './_generated/dataModel'
 import { mutation, QueryCtx } from './_generated/server'
 
+const populateReactions = (ctx: QueryCtx, messageId: Id<"messages">) => {
+    return ctx.db
+            .query("reactions")
+            .withIndex("by_message_id", (q) => q.eq("messageId", messageId))
+            .collect()
+}
+
 const populateUser = (ctx: QueryCtx, userId: Id<"users">) => {
     return ctx.db.get(userId)
 }; 
 
-export const populateMember = (ctx: QueryCtx, memberId: Id<"members">) => {
-    return ctx.db.get(memberId)
+const populateMember = (ctx: QueryCtx, memberId: Id<"members">) => {
+    return ctx.db.get(memberId);
 }
 
 
