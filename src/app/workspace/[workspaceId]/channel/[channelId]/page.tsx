@@ -15,7 +15,7 @@ const ChannelIdPage = () => {
     const { results } = useGetMessages({ channelId })
     const { data: channel, isLoading: channelLoading } = useGetChannel({ id: channelId })
 
-    console.log({results})
+    //console.log({results})
 
     if (channelLoading) {
         return (
@@ -39,7 +39,9 @@ const ChannelIdPage = () => {
     return (
         <div className="flex flex-col h-full">
             <Header name={channel.name}/>
-            <div className="flex-1" />
+            <div className="flex-1">
+                {JSON.stringify(results)}
+            </div>
                 <ChatInput placeholder={`Message # ${channel.name}`}/>
             
         </div>

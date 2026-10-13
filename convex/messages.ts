@@ -1,5 +1,5 @@
 import { v } from 'convex/values'
-import {paginationOptsValidator} from 'convex/server';
+import { paginationOptsValidator } from 'convex/server';
 import { auth } from './auth'
 import { Id } from './_generated/dataModel'
 import { mutation, query, QueryCtx } from './_generated/server'
@@ -72,7 +72,7 @@ export const get = query({
         channelId: v.optional(v.id("channels")), 
         conversationId: v.optional(v.id("conversations")), 
         parentMessageId: v.optional(v.id("messages")), 
-        paginationsOpts: paginationOptsValidator, 
+        paginationOpts: paginationOptsValidator, 
     }, 
     handler: async (ctx, args) => {
         const userId = await auth.getUserId(ctx);
@@ -102,7 +102,7 @@ export const get = query({
                                 .eq("conversationId", _conversationId)
                         )
                 .order("desc")
-                .paginate(args.paginationsOpts);
+                .paginate(args.paginationOpts);
         
         return result;
     },
