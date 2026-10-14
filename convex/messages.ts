@@ -150,9 +150,24 @@ export const get = query({
                                 memberIds: Id<"members">[];
                             })[]
                         );
+
+                        const reactionsWithoutMemberIdProperty = dedupedReactions.map(
+                            ({ memberId, ...rest }) => rest, 
+                        ); 
+
+                        return {
+                            ...message, 
+                            image, 
+                            member, 
+                            user, 
+                            reactions: reactionsWithoutMemberIdProperty, 
+                            threadCount: thread.count, 
+                            threadImage: thread.image, 
+                            threadTimestamp: thread.timestamp,
+                        };
                     })
                 )
-            )
+            ).filter((message): message is NonNullable<typeof message> => message !== null)
         };
     },
 });
@@ -199,7 +214,6 @@ export const create = mutation({
             conversationId: _conversationId, 
             workspaceId: args.workspaceId, 
             parentMessageId: args.parentMessageId, 
-            updateAt: Date.now(),
         });
 
         return messageId
