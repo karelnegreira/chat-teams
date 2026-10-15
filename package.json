@@ -22,6 +22,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "convex": "^1.46.0",
+    "date-fns": "^4.4.0",
     "geist": "^1.7.0",
     "jotai": "^2.19.1",
     "lucide-react": "^0.577.0",
