@@ -3,6 +3,7 @@ import { format, isToday, isYesterday } from "date-fns";
 
 import { Doc, Id } from "../../convex/_generated/dataModel";
 import { Hint } from "./hint";
+import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
 
 const Renderer = dynamic(() => import("@/components/renderer", {ssr: false}))
 
@@ -69,5 +70,24 @@ export const Message = ({
             </div>
         )
     }
+
+    const avatarFallback = authorName.charAt(0).toUpperCase();
+
+
+    return (
+        <div className="flex flex-col gap-2 p-1.5 px-5 hover:bg-gray-100/60 group relative ">
+            <div className="flex items-start gap-2">
+                <button>
+                <Avatar className="size-5 rounded-md mr-1">
+                    <AvatarImage className="rounded-md" src={authorImage} />
+                    <AvatarFallback className="rounded-md bg-violet-600 text-white">
+                        {avatarFallback}
+                    </AvatarFallback>
+                </Avatar>
+                </button>
+            </div>
+            <Renderer value={body} />
+        </div>
+    )
     
 }
