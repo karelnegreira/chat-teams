@@ -53,7 +53,7 @@ export const Message = ({
     return (
         <div className="flex flex-col gap-2 p-1.5 px-5 hover:bg-gray-100/60 group relative ">
             <div className="flex items-start gap-2">
-                <button>
+                <button className="text-xs text-muted-foreground opacity-0 group-hover:opacity-100 w-[4p0x] leading-[22px] text-center hover:underline">
                     {format(new Date(createdAt), "hh:mm")}
                 </button>
             </div>
