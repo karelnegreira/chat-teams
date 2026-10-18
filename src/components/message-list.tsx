@@ -65,7 +65,7 @@ export const MessageList = ({memberName, memberImage, channelName, channelCreati
                                 isEditing={false}
                                 setEditingId={() => {}}
                                 hideThreadButton={false}
-                                isCompact={false}
+                                isCompact={true}
                                 threadCount={message.threadCount}
                                 threadImage={message.threadImage}
                                 threadTimestamp={message.threadTimestamp}
