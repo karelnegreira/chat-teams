@@ -4,6 +4,7 @@ import { format, isToday, isYesterday } from "date-fns";
 import { Doc, Id } from "../../convex/_generated/dataModel";
 import { Hint } from "./hint";
 import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
+import { create } from "domain";
 
 const Renderer = dynamic(() => import("@/components/renderer", {ssr: false}))
 
@@ -87,11 +88,20 @@ export const Message = ({
                 </button>
                 <div className="flex flex-col w-full overflow-hidden">
                     <div className="text-sm">
-                        <button className="font-bold text-primary hover:underline">
+                        <button onClick={() => {}} className="font-bold text-primary hover:underline">
                             {authorName}
                         </button>
+                        <span>&nbsp;&nbsp;</span>
+                        <Hint label={formatFullTime(new Date(createdAt))}>
+                            <button className="text-xs text-muted-foreground hover:underline">
+                                {format(new Date(createdAt), "h:mm a")}
+                            </button>
+                        </Hint>
                     </div>
                     <Renderer value={body} />
+                    {updatedAt ? (
+                        <span className="text-xs text-muted-foreground" >(edited)</span>
+                    ) : null}
                 </div>
             </div>
             
