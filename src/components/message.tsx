@@ -65,9 +65,16 @@ export const Message = ({
                         <button className="text-xs text-muted-foreground opacity-0 group-hover:opacity-100 w-[4p0x] leading-[22px] text-center hover:underline">
                             {format(new Date(createdAt), "hh:mm")}
                         </button>
-                    </Hint>
+                    </Hint>  
+                    <div className="flex flex-col w-full">
+                        <Renderer value={body} />  
+                        {true ? (
+                            <span className="text-xs text-muted-foreground">
+                                (edited)
+                            </span>
+                        ) : null}
+                    </div>     
                 </div>
-                <Renderer value={body} />
             </div>
         )
     }
