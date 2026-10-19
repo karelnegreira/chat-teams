@@ -5,6 +5,7 @@ import { Doc, Id } from "../../convex/_generated/dataModel";
 import { Hint } from "./hint";
 import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
 import { create } from "domain";
+import { Thumbnail } from "./thumbnail";
 
 const Renderer = dynamic(() => import("@/components/renderer", {ssr: false}))
 
@@ -106,6 +107,7 @@ export const Message = ({
                         </Hint>
                     </div>
                     <Renderer value={body} />
+                    <Thumbnail url={image}/>
                     {updatedAt ? (
                         <span className="text-xs text-muted-foreground" >(edited)</span>
                     ) : null}
