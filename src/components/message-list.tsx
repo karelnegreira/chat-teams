@@ -1,7 +1,9 @@
 
-import { format, isToday, isYesterday } from 'date-fns';
+import { differenceInMinutes, format, isToday, isYesterday } from 'date-fns';
 import { GetMessagesReturnType } from "@/features/messages/api/use_get_message";
 import { Message } from './message';
+
+const TIME_THRESHOLD = 5;
 
 
 interface MessageListProps {
@@ -49,6 +51,14 @@ export const MessageList = ({memberName, memberImage, channelName, channelCreati
                         </span>
                     </div>
                     {messages.map((message, index) => {
+                        const prevMessages = messages[index - 1]
+
+                        const isCompact = prevMessages &&  
+                                          prevMessages.user?._id === message.user?._id &&
+                                          differenceInMinutes(
+                                            new Date(message._creationTime), 
+                                            new Date(prevMessages._creationTime)
+                                          ) < TIME_THRESHOLD
                         return (
                             <Message
                                 key={message._id}
@@ -65,7 +75,7 @@ export const MessageList = ({memberName, memberImage, channelName, channelCreati
                                 isEditing={false}
                                 setEditingId={() => {}}
                                 hideThreadButton={false}
-                                isCompact={true}
+                                isCompact={isCompact}
                                 threadCount={message.threadCount}
                                 threadImage={message.threadImage}
                                 threadTimestamp={message.threadTimestamp}

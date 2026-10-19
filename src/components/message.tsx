@@ -68,7 +68,7 @@ export const Message = ({
                     </Hint>  
                     <div className="flex flex-col w-full">
                         <Renderer value={body} />  
-                        {true ? (
+                        {updatedAt ? (
                             <span className="text-xs text-muted-foreground">
                                 (edited)
                             </span>
