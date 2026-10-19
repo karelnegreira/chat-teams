@@ -1,3 +1,5 @@
+import { Button } from "./ui/button";
+import { Smile } from 'lucide-react';
 
 interface ToolbarProps {
     isAuthor: boolean;
@@ -20,8 +22,12 @@ export const Toolbar = ({
 }: ToolbarProps) => {
 
     return (
-        <div>
-            Toolbar
+        <div className="absolute top-0 right-5">
+            <div className="group-hover:opacity-100 opacity-0 transition-opacity border bg-white rounded-md shadow-sm">
+                <Button>
+                    <Smile />
+                </Button>
+            </div>
         </div>
     )
 }
