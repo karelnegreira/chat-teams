@@ -75,7 +75,7 @@ export const MessageList = ({memberName, memberImage, channelName, channelCreati
                                 createdAt={message._creationTime}
                                 isEditing={false}
                                 setEditingId={() => {}}
-                                hideThreadButton={false}
+                                hideThreadButton={variant === "threads"}
                                 isCompact={isCompact}
                                 threadCount={message.threadCount}
                                 threadImage={message.threadImage}
