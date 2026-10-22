@@ -1,5 +1,6 @@
 import { Button } from "./ui/button";
 import { Smile, MessageSquareTextIcon, Pencil, Trash } from 'lucide-react';
+import { Hint } from "./hint";
 
 interface ToolbarProps {
     isAuthor: boolean;
@@ -31,27 +32,34 @@ export const Toolbar = ({
                 >
                     <Smile className="size-4" />
                 </Button>
-                <Button
-                    variant="ghost"
-                    size="iconSm"
-                    disabled={isPending}
-                >
-                    <MessageSquareTextIcon className="size-4" />
-                </Button>
-                <Button
-                    variant="ghost"
-                    size="iconSm"
-                    disabled={isPending}
-                >
-                    <Pencil className="size-4" />
-                </Button>
-                <Button
-                    variant="ghost"
-                    size="iconSm"
-                    disabled={isPending}
-                >
-                    <Trash className="size-4" />
-                </Button>
+                <Hint label="Reply in thread">
+                    <Button
+                        variant="ghost"
+                        size="iconSm"
+                        disabled={isPending}
+                    >
+                        <MessageSquareTextIcon className="size-4" />
+                    </Button>
+                </Hint>
+                <Hint label="Edit message">
+                    <Button
+                        variant="ghost"
+                        size="iconSm"
+                        disabled={isPending}
+                    >
+                        <Pencil className="size-4" />
+                    </Button>
+                </Hint>
+                <Hint label="Delete message">                
+                    <Button
+                        variant="ghost"
+                        size="iconSm"
+                        disabled={isPending}
+                    >
+                        <Trash className="size-4" />
+                    </Button>
+                </Hint>
+
             </div>
         </div>
     )
