@@ -1,5 +1,5 @@
 import { Button } from "./ui/button";
-import { Smile } from 'lucide-react';
+import { Smile, MessageSquareTextIcon, Pencil, Trash } from 'lucide-react';
 
 interface ToolbarProps {
     isAuthor: boolean;
@@ -30,6 +30,27 @@ export const Toolbar = ({
                     disabled={isPending}
                 >
                     <Smile className="size-4" />
+                </Button>
+                <Button
+                    variant="ghost"
+                    size="iconSm"
+                    disabled={isPending}
+                >
+                    <MessageSquareTextIcon className="size-4" />
+                </Button>
+                <Button
+                    variant="ghost"
+                    size="iconSm"
+                    disabled={isPending}
+                >
+                    <Pencil className="size-4" />
+                </Button>
+                <Button
+                    variant="ghost"
+                    size="iconSm"
+                    disabled={isPending}
+                >
+                    <Trash className="size-4" />
                 </Button>
             </div>
         </div>
