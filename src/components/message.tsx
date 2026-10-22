@@ -4,8 +4,8 @@ import { format, isToday, isYesterday } from "date-fns";
 import { Doc, Id } from "../../convex/_generated/dataModel";
 import { Hint } from "./hint";
 import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
-import { create } from "domain";
 import { Thumbnail } from "./thumbnail";
+import { Toolbar } from "./toolbar";
 
 const Renderer = dynamic(() => import("@/components/renderer", {ssr: false}))
 
@@ -18,7 +18,7 @@ interface MessageProps {
     memberId: Id<"members">;
     authorImage?: string;
     authorName?: string;
-    isAutor: boolean;
+    isAuthor: boolean;
     reactions: Array<Omit<Doc<"reactions">, "memberId"> & {
         count: number;
         memberIds: Id<"members">[];
@@ -40,7 +40,7 @@ interface MessageProps {
 export const Message = ({
 
     id, 
-    isAutor, 
+    isAuthor, 
     memberId, 
     authorImage, 
     authorName="Member", 
@@ -113,7 +113,17 @@ export const Message = ({
                     ) : null}
                 </div>
             </div>
-            
+            {!isEditing && (
+                <Toolbar 
+                    isAuthor={isAuthor}
+                    isPending={false}
+                    handleEdit={() => setEditingId(id)}
+                    handleThread={() => {}}
+                    handleDelete={() => {}}
+                    handleReaction={() => {}}
+                    hideThreadButton={hideThreadButton}
+                />
+            )}
         </div>
     )
     
