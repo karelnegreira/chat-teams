@@ -93,7 +93,7 @@ export const update = mutation({
 
         await ctx.db.patch(args.id, {
             body: args.body, 
-            updatedAt: Date.now()
+            updateAt: Date.now()
         });
 
         return args.id;
