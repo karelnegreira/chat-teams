@@ -92,8 +92,14 @@ export const Message = ({
                         </button>
                     </Hint>  
                     {isEditing ? (
-                        <div>
-                            Editor
+                        <div className="w-full h-full">
+                            <Editor 
+                                onSubmit={handleUpdate}
+                                disabled={isPending}
+                                defaultValue={JSON.parse(body)}
+                                onCancel={() => setEditingId}
+                                variant="update"
+                            />
                         </div>
                     ) : (
 
