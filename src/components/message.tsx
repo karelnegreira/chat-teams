@@ -9,6 +9,8 @@ import { Toolbar } from "./toolbar";
 import { useUpdateMessage } from "@/features/messages/api/use-update-message";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
+import { useRemoveMessage } from "@/features/messages/api/use-remove-message";
+import { useConfirm } from "@/hooks/use-confirm";
 
 const Renderer = dynamic(() => import("@/components/renderer"), { ssr: false})
 const Editor = dynamic(() => import ("@/components/editor"), { ssr: false })
@@ -62,9 +64,33 @@ export const Message = ({
     threadTimestamp
 }: MessageProps) => {
 
+    const [ConfirmDialog, confirm] = useConfirm(
+        "Delete message", 
+        "Are you sure that you want to delete the message?"
+    );
+
     const { mutate: updateMessage, isPending: isUpdatingMessage } = useUpdateMessage()
-    
+    const { mutate: removeMessage, isPending: isRemovingMessage } = useRemoveMessage()
+
     const isPending = isUpdatingMessage
+
+    const handleDelete = async () => {
+        const ok = await confirm()
+
+        if (!ok) return;
+
+        removeMessage({id}, {
+            onSuccess: () => {
+                toast.success("Message successfully removed")
+
+                //TODO: close thread if open
+            }, 
+            onError: () => {
+                toast.error("Failed to delete message")
+            }
+        })
+
+    }
 
     const handleUpdate = ({body}: {body: string}) => {
         updateMessage({id, body}, {
@@ -82,50 +108,53 @@ export const Message = ({
 
     if (isCompact) {
         return (
-            <div className={cn("flex flex-col gap-2 p-1.5 px-5 hover:bg-gray-100/60 group relative ", 
-                                isEditing && "bg-[#f2c74433] hover:bg-[#f2c74433]"
-                )}>
-                <div className="flex items-start gap-2">
-                    <Hint label={formatFullTime(new Date(createdAt))}>
-                        <button className="text-xs text-muted-foreground opacity-0 group-hover:opacity-100 w-[4p0x] leading-[22px] text-center hover:underline">
-                            {format(new Date(createdAt), "hh:mm")}
-                        </button>
-                    </Hint>  
-                    {isEditing ? (
-                        <div className="w-full h-full">
-                            <Editor 
-                                onSubmit={handleUpdate}
-                                disabled={isPending}
-                                defaultValue={JSON.parse(body)}
-                                onCancel={() => setEditingId}
-                                variant="update"
-                            />
-                        </div>
-                    ) : (
+            <>
+                <ConfirmDialog />
+                <div className={cn("flex flex-col gap-2 p-1.5 px-5 hover:bg-gray-100/60 group relative ", 
+                                    isEditing && "bg-[#f2c74433] hover:bg-[#f2c74433]"
+                    )}>
+                    <div className="flex items-start gap-2">
+                        <Hint label={formatFullTime(new Date(createdAt))}>
+                            <button className="text-xs text-muted-foreground opacity-0 group-hover:opacity-100 w-[4p0x] leading-[22px] text-center hover:underline">
+                                {format(new Date(createdAt), "hh:mm")}
+                            </button>
+                        </Hint>  
+                        {isEditing ? (
+                            <div className="w-full h-full">
+                                <Editor 
+                                    onSubmit={handleUpdate}
+                                    disabled={isPending}
+                                    defaultValue={JSON.parse(body)}
+                                    onCancel={() => setEditingId}
+                                    variant="update"
+                                />
+                            </div>
+                        ) : (
 
-                    
-                    <div className="flex flex-col w-full">
-                        <Renderer value={body} />  
-                        {updatedAt ? (
-                            <span className="text-xs text-muted-foreground">
-                                (edited)
-                            </span>
-                        ) : null}
-                    </div>     
+                        
+                        <div className="flex flex-col w-full">
+                            <Renderer value={body} />  
+                            {updatedAt ? (
+                                <span className="text-xs text-muted-foreground">
+                                    (edited)
+                                </span>
+                            ) : null}
+                        </div>     
+                    )}
+                    </div>
+                    {!isEditing && (
+                        <Toolbar 
+                            isAuthor={isAuthor}
+                            isPending={isPending}
+                            handleEdit={() => setEditingId(id)}
+                            handleThread={() => {}}
+                            handleDelete={handleDelete}
+                            handleReaction={() => {}}
+                            hideThreadButton={hideThreadButton}
+                        />
                 )}
                 </div>
-                {!isEditing && (
-                    <Toolbar 
-                        isAuthor={isAuthor}
-                        isPending={isPending}
-                        handleEdit={() => setEditingId(id)}
-                        handleThread={() => {}}
-                        handleDelete={() => {}}
-                        handleReaction={() => {}}
-                        hideThreadButton={hideThreadButton}
-                    />
-            )}
-            </div>
+            </>
         )
     }
 
@@ -133,61 +162,64 @@ export const Message = ({
 
 
     return (
-        <div className={cn("flex flex-col gap-2 p-1.5 px-5 hover:bg-gray-100/60 group relative ", 
-         isEditing && "bg-[#f2c74433] hover:bg-[#f2c74433]")}>
-            <div className="flex items-start gap-2">
-                <button>
-                    <Avatar >
-                        <AvatarImage className="rounded-md" src={authorImage} />
-                        <AvatarFallback>
-                            {avatarFallback}
-                        </AvatarFallback>
-                    </Avatar>
-                </button>
-                {isEditing ? (
-                    <div className="w-full h-full">
-                        <Editor
-                            onSubmit={handleUpdate}
-                            disabled={isPending}
-                            defaultValue={JSON.parse(body)}
-                            onCancel={() => setEditingId}
-                            variant="update"
-                        />
-                        
-                    </div>
-                ) : (       
-                <div className="flex flex-col w-full overflow-hidden">
-                    <div className="text-sm">
-                        <button onClick={() => {}} className="font-bold text-primary hover:underline">
-                            {authorName}
-                        </button>
-                        <span>&nbsp;&nbsp;</span>
-                        <Hint label={formatFullTime(new Date(createdAt))}>
-                            <button className="text-xs text-muted-foreground hover:underline">
-                                {format(new Date(createdAt), "h:mm a")}
+        <>
+            <ConfirmDialog />
+            <div className={cn("flex flex-col gap-2 p-1.5 px-5 hover:bg-gray-100/60 group relative ", 
+            isEditing && "bg-[#f2c74433] hover:bg-[#f2c74433]")}>
+                <div className="flex items-start gap-2">
+                    <button>
+                        <Avatar >
+                            <AvatarImage className="rounded-md" src={authorImage} />
+                            <AvatarFallback>
+                                {avatarFallback}
+                            </AvatarFallback>
+                        </Avatar>
+                    </button>
+                    {isEditing ? (
+                        <div className="w-full h-full">
+                            <Editor
+                                onSubmit={handleUpdate}
+                                disabled={isPending}
+                                defaultValue={JSON.parse(body)}
+                                onCancel={() => setEditingId}
+                                variant="update"
+                            />
+                            
+                        </div>
+                    ) : (       
+                    <div className="flex flex-col w-full overflow-hidden">
+                        <div className="text-sm">
+                            <button onClick={() => {}} className="font-bold text-primary hover:underline">
+                                {authorName}
                             </button>
-                        </Hint>
+                            <span>&nbsp;&nbsp;</span>
+                            <Hint label={formatFullTime(new Date(createdAt))}>
+                                <button className="text-xs text-muted-foreground hover:underline">
+                                    {format(new Date(createdAt), "h:mm a")}
+                                </button>
+                            </Hint>
+                        </div>
+                        <Renderer value={body} />
+                        <Thumbnail url={image}/>
+                        {updatedAt ? (
+                            <span className="text-xs text-muted-foreground" >(edited)</span>
+                        ) : null}
                     </div>
-                    <Renderer value={body} />
-                    <Thumbnail url={image}/>
-                    {updatedAt ? (
-                        <span className="text-xs text-muted-foreground" >(edited)</span>
-                    ) : null}
+                    )}
                 </div>
+                {!isEditing && (
+                    <Toolbar 
+                        isAuthor={isAuthor}
+                        isPending={isPending}
+                        handleEdit={() => setEditingId(id)}
+                        handleThread={() => {}}
+                        handleDelete={handleDelete}
+                        handleReaction={() => {}}
+                        hideThreadButton={hideThreadButton}
+                    />
                 )}
             </div>
-            {!isEditing && (
-                <Toolbar 
-                    isAuthor={isAuthor}
-                    isPending={isPending}
-                    handleEdit={() => setEditingId(id)}
-                    handleThread={() => {}}
-                    handleDelete={() => {}}
-                    handleReaction={() => {}}
-                    hideThreadButton={hideThreadButton}
-                />
-            )}
-        </div>
+        </>
     )
     
 }
